@@ -17,13 +17,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let matchHistoryModel = MatchHistoryModel()
             let matchHistoryPresenter = MatchHistoryPresenter(model: matchHistoryModel, view: matchHistoryVC)
             matchHistoryVC.presenter = matchHistoryPresenter
+            matchHistoryVC.tabBarItem.title = "Match History"
+            matchHistoryVC.tabBarItem.image = UIImage(named: "list.bullet.rectangle")
             let navigationController = UINavigationController(rootViewController: matchHistoryVC)
             return navigationController
         }()
 
-        window.rootViewController = matchHistoryVC
+        let newMatchVC: UIViewController = {
+            let newMatchVC = NewMatchViewController()
+            newMatchVC.tabBarItem.title = "New Match"
+            newMatchVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
+            return newMatchVC
+        }()
+
+        let playerStatsVC: UIViewController = {
+            let playerStatsVC = PlayerStatsViewController()
+            playerStatsVC.tabBarItem.title = "Player Stats"
+            playerStatsVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
+            return playerStatsVC
+        }()
+
+        let rootTabBarController = RootTabBarViewController()
+        rootTabBarController.viewControllers = [matchHistoryVC, newMatchVC, playerStatsVC]
+
+        window.rootViewController = rootTabBarController
         window.makeKeyAndVisible()
         self.window = window
+        #warning("Last Checkpoint: Laid out VCs into RootTabBar. Next work on teamSelectView.")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
