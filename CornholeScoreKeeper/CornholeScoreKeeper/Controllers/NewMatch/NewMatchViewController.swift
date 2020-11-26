@@ -3,7 +3,7 @@ import UIKit
 class NewMatchViewController: UIViewController {
 
     private weak var matchTypeSegmentController: UISegmentedControl!
-    private weak var teamSelectView: UIView!
+    private weak var teamSelectView: TeamSelectView!
     private weak var startMatchButton: UIButton!
 
     override func loadView() {
@@ -13,7 +13,7 @@ class NewMatchViewController: UIViewController {
         matchTypeSegmentController.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(matchTypeSegmentController)
 
-        let teamSelectView = UIView(frame: .zero)
+        let teamSelectView = TeamSelectView(frame: .zero)
         teamSelectView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(teamSelectView)
 
@@ -30,7 +30,7 @@ class NewMatchViewController: UIViewController {
             teamSelectView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             teamSelectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             teamSelectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            teamSelectView.heightAnchor.constraint(equalToConstant: 150),
+//            teamSelectView.heightAnchor.constraint(equalToConstant: 300),
 
             startMatchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startMatchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -45,8 +45,14 @@ class NewMatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureMatchTypeSegmentControl()
         configureStartButton()
+    }
+
+    private func configureMatchTypeSegmentControl() {
+        matchTypeSegmentController.backgroundColor = .systemGray
+        matchTypeSegmentController.tintColor = .systemGray5
+        matchTypeSegmentController.selectedSegmentIndex = 0
     }
 
     private func configureStartButton() {
