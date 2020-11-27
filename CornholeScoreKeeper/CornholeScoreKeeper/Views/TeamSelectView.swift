@@ -64,6 +64,7 @@ class TeamSelectView: UIView {
                     versusLabel,
                     addRightBluePitcherButton, rightBoardView, addRightRedPitcherButton)
         configureViewConstraints()
+
     }
 
     required init?(coder: NSCoder) {
