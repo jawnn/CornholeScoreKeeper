@@ -10,6 +10,9 @@
 		D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */; };
 		D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93A256DDED900130192 /* PlayerStatsViewController.swift */; };
 		D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93D256DE10100130192 /* TeamSelectView.swift */; };
+		D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */; };
+		D2B34D552576F74A008DDB3F /* MatchScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D542576F74A008DDB3F /* MatchScoreView.swift */; };
+		D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D582576F8A3008DDB3F /* LineView.swift */; };
 		D2B35FD3256DBB1A00C1C05B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FD2256DBB1A00C1C05B /* AppDelegate.swift */; };
 		D2B35FD5256DBB1A00C1C05B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FD4256DBB1A00C1C05B /* SceneDelegate.swift */; };
 		D2B35FDD256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FDB256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld */; };
@@ -33,6 +36,9 @@
 		D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornholeBoardView.swift; sourceTree = "<group>"; };
 		D267B93A256DDED900130192 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		D267B93D256DE10100130192 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
+		D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchViewController.swift; sourceTree = "<group>"; };
+		D2B34D542576F74A008DDB3F /* MatchScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchScoreView.swift; sourceTree = "<group>"; };
+		D2B34D582576F8A3008DDB3F /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		D2B35FCF256DBB1A00C1C05B /* CornholeScoreKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CornholeScoreKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B35FD2256DBB1A00C1C05B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B35FD4256DBB1A00C1C05B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2B34D4F2576F685008DDB3F /* CurrentMatch */ = {
+			isa = PBXGroup;
+			children = (
+				D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */,
+			);
+			path = CurrentMatch;
+			sourceTree = "<group>";
+		};
 		D2B35FC6256DBB1A00C1C05B = {
 			isa = PBXGroup;
 			children = (
@@ -84,11 +98,11 @@
 		D2B35FD1256DBB1A00C1C05B /* CornholeScoreKeeper */ = {
 			isa = PBXGroup;
 			children = (
-				D2B36021256DD8F400C1C05B /* Views */,
 				D2B35FD2256DBB1A00C1C05B /* AppDelegate.swift */,
 				D2B35FD4256DBB1A00C1C05B /* SceneDelegate.swift */,
 				D2B35FF7256DBF7E00C1C05B /* Controllers */,
 				D2B35FF6256DBF6E00C1C05B /* Models */,
+				D2B36021256DD8F400C1C05B /* Views */,
 				D2B35FDE256DBB1D00C1C05B /* Assets.xcassets */,
 				D2B35FE0256DBB1D00C1C05B /* LaunchScreen.storyboard */,
 				D2B35FE3256DBB1D00C1C05B /* Info.plist */,
@@ -125,10 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				D2B36020256DD38400C1C05B /* PlayerStats */,
-				D2B3601E256DD36D00C1C05B /* CurrentMatch */,
 				D2B36012256DD27C00C1C05B /* RootTabBarController */,
 				D2B35FEB256DBB9400C1C05B /* MatchHistory */,
 				D2B36017256DD2C300C1C05B /* NewMatch */,
+				D2B34D4F2576F685008DDB3F /* CurrentMatch */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -149,13 +163,6 @@
 			path = NewMatch;
 			sourceTree = "<group>";
 		};
-		D2B3601E256DD36D00C1C05B /* CurrentMatch */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CurrentMatch;
-			sourceTree = "<group>";
-		};
 		D2B36020256DD38400C1C05B /* PlayerStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +176,8 @@
 			children = (
 				D267B93D256DE10100130192 /* TeamSelectView.swift */,
 				D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */,
+				D2B34D542576F74A008DDB3F /* MatchScoreView.swift */,
+				D2B34D582576F8A3008DDB3F /* LineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,7 +254,9 @@
 				D2B35FDD256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld in Sources */,
 				D2B35FF0256DBBDB00C1C05B /* MatchHistoryPresenter.swift in Sources */,
 				D2B36014256DD2A800C1C05B /* RootTabBarViewController.swift in Sources */,
+				D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */,
 				D2B36001256DC05400C1C05B /* Match.swift in Sources */,
+				D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */,
 				D2B35FF3256DBBEB00C1C05B /* MatchHistoryModel.swift in Sources */,
 				D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */,
 				D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */,
@@ -260,6 +271,7 @@
 				D2B35FF9256DBFBE00C1C05B /* Archive.swift in Sources */,
 				D2B36004256DC05F00C1C05B /* Frame.swift in Sources */,
 				D2B3600A256DC09300C1C05B /* Pitcher.swift in Sources */,
+				D2B34D552576F74A008DDB3F /* MatchScoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
