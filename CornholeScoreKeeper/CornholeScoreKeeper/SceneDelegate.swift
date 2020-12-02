@@ -31,14 +31,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }()
 
         let playerStatsVC: UIViewController = {
-            let playerStatsVC = PlayerStatsViewController()
+            let playerStatsVC = CurrentMatchViewController()
             playerStatsVC.tabBarItem.title = "Player Stats"
             playerStatsVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
             return playerStatsVC
         }()
 
         let rootTabBarController = RootTabBarViewController()
-        rootTabBarController.viewControllers = [matchHistoryVC, newMatchVC, playerStatsVC]
+        #warning("Refer back to commented before merging.")
+//        rootTabBarController.viewControllers = [matchHistoryVC, newMatchVC, playerStatsVC]
+        rootTabBarController.viewControllers = [playerStatsVC, matchHistoryVC, newMatchVC]
 
         window.rootViewController = rootTabBarController
         window.makeKeyAndVisible()
