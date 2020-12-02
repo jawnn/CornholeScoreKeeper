@@ -4,7 +4,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -18,22 +17,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let matchHistoryPresenter = MatchHistoryPresenter(model: matchHistoryModel, view: matchHistoryVC)
             matchHistoryVC.presenter = matchHistoryPresenter
             matchHistoryVC.tabBarItem.title = "Match History"
-            matchHistoryVC.tabBarItem.image = UIImage(named: "list.bullet.rectangle")
+            matchHistoryVC.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle")
             let navigationController = UINavigationController(rootViewController: matchHistoryVC)
             return navigationController
         }()
 
         let newMatchVC: UIViewController = {
             let newMatchVC = NewMatchViewController()
-            newMatchVC.tabBarItem.title = "New Match"
-            newMatchVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
-            return newMatchVC
+            let router = NewMatchRouter(view: newMatchVC)
+            let navigationController = router.navigationController
+            let presenter = NewMatchPresenter(view: newMatchVC)
+            newMatchVC.router = router
+            newMatchVC.presenter = presenter
+            navigationController.tabBarItem.title = "New Match"
+            navigationController.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
+            return navigationController
         }()
 
         let playerStatsVC: UIViewController = {
             let playerStatsVC = PlayerStatsViewController()
             playerStatsVC.tabBarItem.title = "Player Stats"
-            playerStatsVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
+            playerStatsVC.tabBarItem.image = UIImage(systemName: "chart.bar.xaxis")
             return playerStatsVC
         }()
 

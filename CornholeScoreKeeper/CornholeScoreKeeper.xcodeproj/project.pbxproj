@@ -14,6 +14,8 @@
 		D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */; };
 		D2B34D552576F74A008DDB3F /* MatchScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D542576F74A008DDB3F /* MatchScoreView.swift */; };
 		D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D582576F8A3008DDB3F /* LineView.swift */; };
+		D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */; };
+		D2B34D472576EA62008DDB3F /* NewMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */; };
 		D2B35FD3256DBB1A00C1C05B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FD2256DBB1A00C1C05B /* AppDelegate.swift */; };
 		D2B35FD5256DBB1A00C1C05B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FD4256DBB1A00C1C05B /* SceneDelegate.swift */; };
 		D2B35FDD256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2B35FDB256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld */; };
@@ -41,6 +43,8 @@
 		D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchViewController.swift; sourceTree = "<group>"; };
 		D2B34D542576F74A008DDB3F /* MatchScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchScoreView.swift; sourceTree = "<group>"; };
 		D2B34D582576F8A3008DDB3F /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchRouter.swift; sourceTree = "<group>"; };
+		D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchPresenter.swift; sourceTree = "<group>"; };
 		D2B35FCF256DBB1A00C1C05B /* CornholeScoreKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CornholeScoreKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B35FD2256DBB1A00C1C05B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B35FD4256DBB1A00C1C05B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				D2B36018256DD35300C1C05B /* NewMatchViewController.swift */,
+				D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */,
+				D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */,
 			);
 			path = NewMatch;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 			files = (
 				D2B35FDD256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld in Sources */,
 				D2B35FF0256DBBDB00C1C05B /* MatchHistoryPresenter.swift in Sources */,
+				D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */,
 				D2B36014256DD2A800C1C05B /* RootTabBarViewController.swift in Sources */,
 				D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */,
 				D2B36001256DC05400C1C05B /* Match.swift in Sources */,
@@ -265,6 +272,8 @@
 				D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */,
 				D282FB272578257000C43E07 /* TurnIndicatorView.swift in Sources */,
 				D2B35FD3256DBB1A00C1C05B /* AppDelegate.swift in Sources */,
+				D2B34D472576EA62008DDB3F /* NewMatchPresenter.swift in Sources */,
+				D2B34D4C2576ED96008DDB3F /* CurrentMatchViewController.swift in Sources */,
 				D2B35FFE256DC04C00C1C05B /* Player.swift in Sources */,
 				D2B35FED256DBBB800C1C05B /* MatchHistoryViewController.swift in Sources */,
 				D2B3600E256DC97300C1C05B /* Record.swift in Sources */,
