@@ -10,6 +10,7 @@
 		D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */; };
 		D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93A256DDED900130192 /* PlayerStatsViewController.swift */; };
 		D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93D256DE10100130192 /* TeamSelectView.swift */; };
+		D282FB272578257000C43E07 /* TurnIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282FB262578257000C43E07 /* TurnIndicatorView.swift */; };
 		D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */; };
 		D2B34D552576F74A008DDB3F /* MatchScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D542576F74A008DDB3F /* MatchScoreView.swift */; };
 		D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D582576F8A3008DDB3F /* LineView.swift */; };
@@ -36,6 +37,7 @@
 		D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornholeBoardView.swift; sourceTree = "<group>"; };
 		D267B93A256DDED900130192 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		D267B93D256DE10100130192 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
+		D282FB262578257000C43E07 /* TurnIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnIndicatorView.swift; sourceTree = "<group>"; };
 		D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchViewController.swift; sourceTree = "<group>"; };
 		D2B34D542576F74A008DDB3F /* MatchScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchScoreView.swift; sourceTree = "<group>"; };
 		D2B34D582576F8A3008DDB3F /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */,
 				D2B34D542576F74A008DDB3F /* MatchScoreView.swift */,
 				D2B34D582576F8A3008DDB3F /* LineView.swift */,
+				D282FB262578257000C43E07 /* TurnIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				D2B35FF3256DBBEB00C1C05B /* MatchHistoryModel.swift in Sources */,
 				D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */,
 				D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */,
+				D282FB272578257000C43E07 /* TurnIndicatorView.swift in Sources */,
 				D2B35FD3256DBB1A00C1C05B /* AppDelegate.swift in Sources */,
 				D2B35FFE256DC04C00C1C05B /* Player.swift in Sources */,
 				D2B35FED256DBBB800C1C05B /* MatchHistoryViewController.swift in Sources */,
