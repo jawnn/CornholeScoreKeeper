@@ -31,21 +31,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }()
 
         let playerStatsVC: UIViewController = {
-            let playerStatsVC = CurrentMatchViewController()
+            let playerStatsVC = PlayerStatsViewController()
             playerStatsVC.tabBarItem.title = "Player Stats"
             playerStatsVC.tabBarItem.image = UIImage(named: "plus.circle.fill")
             return playerStatsVC
         }()
 
         let rootTabBarController = RootTabBarViewController()
-        #warning("Refer back to commented before merging.")
-//        rootTabBarController.viewControllers = [matchHistoryVC, newMatchVC, playerStatsVC]
-        rootTabBarController.viewControllers = [playerStatsVC, matchHistoryVC, newMatchVC]
+        rootTabBarController.viewControllers = [matchHistoryVC, newMatchVC, playerStatsVC]
 
         window.rootViewController = rootTabBarController
         window.makeKeyAndVisible()
         self.window = window
-        #warning("Last Checkpoint: Laid out VCs into RootTabBar. Next work on teamSelectView.")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
