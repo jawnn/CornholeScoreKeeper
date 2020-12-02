@@ -6,6 +6,9 @@ class NewMatchViewController: UIViewController {
     private weak var teamSelectView: TeamSelectView!
     private weak var startMatchButton: UIButton!
 
+    var presenter: NewMatchPresenterType!
+    var router: NewMatchRouterType!
+
     override func loadView() {
         super.loadView()
 
@@ -94,6 +97,11 @@ class NewMatchViewController: UIViewController {
     @objc func didTapStartMatchButton() {
         #warning("TODO")
         // Should remain disabled and alpha 50% until player requirements are met for selected match type
+        router.toCurrentMatchViewController()
     }
+
+}
+
+extension NewMatchViewController: NewMatchViewType {
 
 }
