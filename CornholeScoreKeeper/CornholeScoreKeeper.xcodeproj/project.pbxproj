@@ -12,6 +12,7 @@
 		D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93D256DE10100130192 /* TeamSelectView.swift */; };
 		D282FB272578257000C43E07 /* TurnIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282FB262578257000C43E07 /* TurnIndicatorView.swift */; };
 		D28569892579707100F43121 /* NewMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28569882579707100F43121 /* NewMatchModel.swift */; };
+		D285698D257999E100F43121 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285698C257999E100F43121 /* UIView+Extensions.swift */; };
 		D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */; };
 		D2B34D472576EA62008DDB3F /* NewMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */; };
 		D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */; };
@@ -42,6 +43,7 @@
 		D267B93D256DE10100130192 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
 		D282FB262578257000C43E07 /* TurnIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnIndicatorView.swift; sourceTree = "<group>"; };
 		D28569882579707100F43121 /* NewMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchModel.swift; sourceTree = "<group>"; };
+		D285698C257999E100F43121 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchRouter.swift; sourceTree = "<group>"; };
 		D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchPresenter.swift; sourceTree = "<group>"; };
 		D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D285698B257999C000F43121 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D285698C257999E100F43121 /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D285698F25799A1500F43121 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D2B35FE3256DBB1D00C1C05B /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		D285699025799A1C00F43121 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				D2B35FDE256DBB1D00C1C05B /* Assets.xcassets */,
+				D2B35FE0256DBB1D00C1C05B /* LaunchScreen.storyboard */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		D2B34D4F2576F685008DDB3F /* CurrentMatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +138,9 @@
 				D2B35FF7256DBF7E00C1C05B /* Controllers */,
 				D2B35FF6256DBF6E00C1C05B /* Models */,
 				D2B36021256DD8F400C1C05B /* Views */,
-				D2B35FDE256DBB1D00C1C05B /* Assets.xcassets */,
-				D2B35FE0256DBB1D00C1C05B /* LaunchScreen.storyboard */,
-				D2B35FE3256DBB1D00C1C05B /* Info.plist */,
-				D2B35FDB256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld */,
+				D285699025799A1C00F43121 /* Media */,
+				D285698B257999C000F43121 /* Extensions */,
+				D285698F25799A1500F43121 /* SupportingFiles */,
 			);
 			path = CornholeScoreKeeper;
 			sourceTree = "<group>";
@@ -132,6 +158,7 @@
 		D2B35FF6256DBF6E00C1C05B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D2B35FDB256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld */,
 				D2B35FF8256DBFBE00C1C05B /* Archive.swift */,
 				D2B36003256DC05F00C1C05B /* Frame.swift */,
 				D2B36000256DC05400C1C05B /* Match.swift */,
@@ -281,6 +308,7 @@
 				D2B35FED256DBBB800C1C05B /* MatchHistoryViewController.swift in Sources */,
 				D2B3600E256DC97300C1C05B /* Record.swift in Sources */,
 				D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */,
+				D285698D257999E100F43121 /* UIView+Extensions.swift in Sources */,
 				D2B35FD5256DBB1A00C1C05B /* SceneDelegate.swift in Sources */,
 				D2B36007256DC07000C1C05B /* Team.swift in Sources */,
 				D2B36019256DD35300C1C05B /* NewMatchViewController.swift in Sources */,
