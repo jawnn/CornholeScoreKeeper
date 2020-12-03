@@ -1,5 +1,18 @@
 import UIKit
 
+protocol TeamSelectViewDelegate: class {
+    var isSelecting: Bool { get set }
+    var selectedButtonTag: Int { get set }
+    func placeSelectedPlayerOnTeam(tag: Int)
+}
+
+enum AddPitcherButtonTag: Int {
+    case leftBlueButton
+    case leftRedButton
+    case rightBlueButton
+    case rightRedButton
+}
+
 class TeamSelectView: UIView {
 
     let addLeftBluePitcherButton: UIButton = {
@@ -7,6 +20,7 @@ class TeamSelectView: UIView {
         button.setTitle("Join Blue", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
+        button.tag = AddPitcherButtonTag.leftBlueButton.rawValue
         return button
     }()
 
@@ -22,6 +36,7 @@ class TeamSelectView: UIView {
         button.setTitle("Join Red", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemRed
+        button.tag = AddPitcherButtonTag.leftRedButton.rawValue
         return button
     }()
 
@@ -38,6 +53,7 @@ class TeamSelectView: UIView {
         button.setTitle("Join Blue", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
+        button.tag = AddPitcherButtonTag.rightBlueButton.rawValue
         return button
     }()
 
@@ -53,8 +69,11 @@ class TeamSelectView: UIView {
         button.setTitle("Join Red", for: .normal)
         button.backgroundColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = AddPitcherButtonTag.rightRedButton.rawValue
         return button
     }()
+
+    weak var delegate: TeamSelectViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,6 +84,7 @@ class TeamSelectView: UIView {
                     versusLabel,
                     addRightBluePitcherButton, rightBoardView, addRightRedPitcherButton)
         configureViewConstraints()
+        configureTargetForJoinButtons()
 
     }
 
@@ -110,6 +130,17 @@ class TeamSelectView: UIView {
             addRightRedPitcherButton.heightAnchor.constraint(equalToConstant: 75),
             addRightRedPitcherButton.widthAnchor.constraint(equalToConstant: 100)
         ])
+    }
+
+    private func configureTargetForJoinButtons() {
+        let buttons = [addLeftBluePitcherButton, addLeftRedPitcherButton, addRightBluePitcherButton, addRightRedPitcherButton]
+        for button in buttons {
+            button.addTarget(self, action: #selector(didTapJoinButton(sender:)), for: .touchUpInside)
+        }
+    }
+
+    @objc func didTapJoinButton(sender: UIButton) {
+        delegate?.placeSelectedPlayerOnTeam(tag: sender.tag)
     }
 
 }
