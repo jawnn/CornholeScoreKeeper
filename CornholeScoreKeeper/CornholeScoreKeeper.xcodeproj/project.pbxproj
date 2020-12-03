@@ -456,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGLQEP2M6C;
-				INFOPLIST_FILE = CornholeScoreKeeper/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CornholeScoreKeeper/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,7 +475,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGLQEP2M6C;
-				INFOPLIST_FILE = CornholeScoreKeeper/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CornholeScoreKeeper/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
