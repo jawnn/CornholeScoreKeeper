@@ -60,6 +60,7 @@ class TeamSelectView: UIView {
         super.init(frame: frame)
 
         backgroundColor = .systemGray
+        layer.cornerRadius = 10
         addSubviews(addLeftBluePitcherButton, leftBoardView, addLeftRedPitcherButton,
                     versusLabel,
                     addRightBluePitcherButton, rightBoardView, addRightRedPitcherButton)
