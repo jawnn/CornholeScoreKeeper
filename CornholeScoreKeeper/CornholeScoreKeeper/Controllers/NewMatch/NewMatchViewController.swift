@@ -58,12 +58,14 @@ class NewMatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        teamSelectView.delegate = presenter
         configureMatchTypeSegmentControl()
         configurePlayerSelectTableView()
         configureStartButton()
     }
 
     private func configurePlayerSelectTableView() {
+        playerSelectTableView.isHidden = true
         playerSelectTableView.layer.cornerRadius = 15
         playerSelectTableView.backgroundColor = .systemTeal
         playerSelectTableView.dataSource = presenter
@@ -91,8 +93,10 @@ class NewMatchViewController: UIViewController {
             UIView.animate(withDuration: 0.20) {
                 self.teamSelectView.addRightBluePitcherButton.alpha = 0.50
                 self.teamSelectView.addRightBluePitcherButton.isEnabled = false
+                self.teamSelectView.addRightBluePitcherButton.setTitle("Join Blue", for: .normal)
                 self.teamSelectView.addRightRedPitcherButton.alpha = 0.50
                 self.teamSelectView.addRightRedPitcherButton.isEnabled = false
+                self.teamSelectView.addRightRedPitcherButton.setTitle("Join Red", for: .normal)
             }
         case MatchType.doubles.rawValue:
             UIView.animate(withDuration: 0.10) {
@@ -121,9 +125,29 @@ class NewMatchViewController: UIViewController {
 }
 
 extension NewMatchViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        switch presenter.selectedButtonTag {
+        case AddPitcherButtonTag.leftBlueButton.rawValue:
+            teamSelectView.addLeftBluePitcherButton.setTitle(cell.textLabel?.text, for: .normal)
+        case AddPitcherButtonTag.leftRedButton.rawValue:
+            teamSelectView.addLeftRedPitcherButton.setTitle(cell.textLabel?.text, for: .normal)
+        case AddPitcherButtonTag.rightBlueButton.rawValue:
+            teamSelectView.addRightBluePitcherButton.setTitle(cell.textLabel?.text, for: .normal)
+        case AddPitcherButtonTag.rightRedButton.rawValue:
+            teamSelectView.addRightRedPitcherButton.setTitle(cell.textLabel?.text, for: .normal)
+        default:
+            break
+        }
+        presenter.isSelecting = false
+        playerSelectTableView.isHidden = true
+    }
 }
 
 extension NewMatchViewController: NewMatchViewType {
-
+    func toggleTableViewVisibility() {
+        playerSelectTableView.isHidden = !presenter.isSelecting
+    }
 }

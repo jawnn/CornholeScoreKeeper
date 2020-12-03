@@ -26,7 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let newMatchVC = NewMatchViewController()
             let router = NewMatchRouter(view: newMatchVC)
             let navigationController = router.navigationController
-            let presenter = NewMatchPresenter(view: newMatchVC)
+            let model = NewMatchModel(players: Archive().players)
+            let presenter = NewMatchPresenter(model: model, view: newMatchVC)
             newMatchVC.router = router
             newMatchVC.presenter = presenter
             navigationController.tabBarItem.title = "New Match"
