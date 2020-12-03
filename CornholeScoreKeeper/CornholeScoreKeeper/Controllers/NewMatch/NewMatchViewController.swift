@@ -4,6 +4,7 @@ class NewMatchViewController: UIViewController {
 
     private weak var matchTypeSegmentController: UISegmentedControl!
     private weak var teamSelectView: TeamSelectView!
+    private weak var playerSelectTableView: UITableView!
     private weak var startMatchButton: UIButton!
 
     var presenter: NewMatchPresenterType!
@@ -24,16 +25,24 @@ class NewMatchViewController: UIViewController {
         startMatchButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(startMatchButton)
 
+        let playerSelectTableView = UITableView(frame: .zero)
+        playerSelectTableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(playerSelectTableView)
+
         NSLayoutConstraint.activate([
-            matchTypeSegmentController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            matchTypeSegmentController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             matchTypeSegmentController.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             matchTypeSegmentController.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             matchTypeSegmentController.heightAnchor.constraint(equalToConstant: 44),
 
-            teamSelectView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            teamSelectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            teamSelectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            teamSelectView.heightAnchor.constraint(equalToConstant: 300),
+            teamSelectView.topAnchor.constraint(equalTo: matchTypeSegmentController.bottomAnchor, constant: 8),
+            teamSelectView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            teamSelectView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+
+            playerSelectTableView.topAnchor.constraint(equalTo: teamSelectView.bottomAnchor, constant: 8),
+            playerSelectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            playerSelectTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            playerSelectTableView.bottomAnchor.constraint(equalTo: startMatchButton.topAnchor, constant: -8),
 
             startMatchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startMatchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -43,13 +52,22 @@ class NewMatchViewController: UIViewController {
 
         self.matchTypeSegmentController = matchTypeSegmentController
         self.teamSelectView = teamSelectView
+        self.playerSelectTableView = playerSelectTableView
         self.startMatchButton = startMatchButton
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMatchTypeSegmentControl()
+        configurePlayerSelectTableView()
         configureStartButton()
+    }
+
+    private func configurePlayerSelectTableView() {
+        playerSelectTableView.layer.cornerRadius = 15
+        playerSelectTableView.backgroundColor = .systemTeal
+        playerSelectTableView.dataSource = presenter
+        playerSelectTableView.delegate = self
     }
 
     private func configureMatchTypeSegmentControl() {
@@ -99,6 +117,10 @@ class NewMatchViewController: UIViewController {
         // Should remain disabled and alpha 50% until player requirements are met for selected match type
         router.toCurrentMatchViewController()
     }
+
+}
+
+extension NewMatchViewController: UITableViewDelegate {
 
 }
 
