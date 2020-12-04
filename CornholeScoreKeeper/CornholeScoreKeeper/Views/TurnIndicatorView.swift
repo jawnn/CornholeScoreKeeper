@@ -1,6 +1,17 @@
 import UIKit
 
+protocol IncrementScoreDelegate: class {
+    func incrementScoreAndUpdateLabel(tag: Int)
+}
+
+enum IncrementScoreButton: Int {
+    case blueOnButton, blueUndoOnButton, redOnButton, redUndoOnButton,
+         blueUndoInButton, blueInButton, redInButton, redUndoInButton
+}
+
 class TurnIndicatorView: UIView {
+
+    weak var delegate: IncrementScoreDelegate?
 
     let bluePitcherLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -39,6 +50,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("+3", for: .normal)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.blueInButton.rawValue
         return button
     }()
 
@@ -47,6 +59,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("-3", for: .normal)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.blueUndoInButton.rawValue
         return button
     }()
 
@@ -55,6 +68,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("+1", for: .normal)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.blueOnButton.rawValue
         return button
     }()
 
@@ -63,6 +77,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("-1", for: .normal)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.blueUndoOnButton.rawValue
         return button
     }()
 
@@ -78,6 +93,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("+1", for: .normal)
         button.backgroundColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.redOnButton.rawValue
         return button
     }()
 
@@ -86,6 +102,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("-1", for: .normal)
         button.backgroundColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.redUndoOnButton.rawValue
         return button
     }()
 
@@ -94,6 +111,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("+3", for: .normal)
         button.backgroundColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.redInButton.rawValue
         return button
     }()
 
@@ -102,6 +120,7 @@ class TurnIndicatorView: UIView {
         button.setTitle("-3", for: .normal)
         button.backgroundColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = IncrementScoreButton.redUndoInButton.rawValue
         return button
     }()
 
@@ -165,7 +184,12 @@ class TurnIndicatorView: UIView {
             button.heightAnchor.constraint(equalToConstant: 50).isActive = true
             button.widthAnchor.constraint(equalToConstant: 50).isActive = true
             button.layer.cornerRadius = 25
+            button.addTarget(self, action: #selector(didTapScoreButton(sender:)), for: .touchUpInside)
         }
+    }
+
+    @objc func didTapScoreButton(sender: UIButton) {
+        delegate?.incrementScoreAndUpdateLabel(tag: sender.tag)
     }
 
 }
