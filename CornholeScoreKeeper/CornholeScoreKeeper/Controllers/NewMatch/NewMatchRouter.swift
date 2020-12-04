@@ -16,6 +16,8 @@ class NewMatchRouter: NewMatchRouterType {
 
     func toCurrentMatchViewController() {
         let viewController = CurrentMatchViewController()
+        let presenter = CurrentMatchPresenter(view: viewController)
+        viewController.presenter = presenter
         navigationController.pushViewController(viewController, animated: true)
     }
 }

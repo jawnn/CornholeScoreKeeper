@@ -1,8 +1,24 @@
-//
-//  CurrentMatchPresenter.swift
-//  CornholeScoreKeeper
-//
-//  Created by Roberto Manese III on 12/4/20.
-//
+import UIKit
 
-import Foundation
+protocol CurrentMatchPresenterType: IncrementScoreDelegate {
+
+}
+
+protocol CurrentMatchViewType {
+    func updateScoreLabel(tag: Int)
+}
+
+class CurrentMatchPresenter: CurrentMatchPresenterType {
+    var view: CurrentMatchViewType
+
+    init(view: CurrentMatchViewType) {
+        self.view = view
+    }
+}
+
+extension CurrentMatchPresenter {
+    func incrementScoreAndUpdateLabel(tag: Int) {
+        view.updateScoreLabel(tag: tag)
+    }
+}
+

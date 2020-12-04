@@ -6,6 +6,8 @@ class CurrentMatchViewController: UIViewController {
     private weak var turnIndicatorView: TurnIndicatorView!
     private weak var completeRoundButton: UIButton!
 
+    var presenter: CurrentMatchPresenterType!
+
     override func loadView() {
         super.loadView()
 
@@ -39,6 +41,7 @@ class CurrentMatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        turnIndicatorView.delegate = presenter
         matchScoreSection.backgroundColor = .systemGray5
         matchScoreSection.layer.cornerRadius = 10
 
@@ -59,4 +62,29 @@ class CurrentMatchViewController: UIViewController {
         
     }
 
+}
+
+extension CurrentMatchViewController: CurrentMatchViewType {
+    func updateScoreLabel(tag: Int) {
+        switch tag {
+        case IncrementScoreButton.blueUndoOnButton.rawValue:
+            matchScoreSection.blueFrameScoreLabel.text = "-1"
+        case IncrementScoreButton.blueOnButton.rawValue:
+            matchScoreSection.blueFrameScoreLabel.text = "1"
+        case IncrementScoreButton.blueUndoInButton.rawValue:
+            matchScoreSection.blueFrameScoreLabel.text = "-3"
+        case IncrementScoreButton.blueInButton.rawValue:
+            matchScoreSection.blueFrameScoreLabel.text = "3"
+        case IncrementScoreButton.redUndoOnButton.rawValue:
+            matchScoreSection.redFrameScoreLabel.text = "-1"
+        case IncrementScoreButton.redOnButton.rawValue:
+            matchScoreSection.redFrameScoreLabel.text = "1"
+        case IncrementScoreButton.redUndoInButton.rawValue:
+            matchScoreSection.redFrameScoreLabel.text = "-3"
+        case IncrementScoreButton.redInButton.rawValue:
+            matchScoreSection.redFrameScoreLabel.text = "3"
+        default:
+            break
+        }
+    }
 }
