@@ -23,7 +23,10 @@ class MatchHistoryPresenter: NSObject, MatchHistoryPresenterType {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MatchResultsTableCell") as? MatchResultsTableCell else {
+            return UITableViewCell()
+        }
+        return cell
     }
 
 }

@@ -31,6 +31,13 @@ class MatchHistoryViewController: UIViewController {
         view.backgroundColor = .systemGreen
     }
 
+    private func configuireTableView() {
+        tableView.rowHeight = 70
+        tableView.register(MatchResultsTableCell.self, forCellReuseIdentifier: "MatchResultsTableCell")
+        tableView.dataSource = presenter
+        tableView.delegate = self
+    }
+
     private func configureNavigationBar() {
         title = "Match History"
 
@@ -40,11 +47,6 @@ class MatchHistoryViewController: UIViewController {
 
     @objc func didTapNewMatchButton() {
 
-    }
-
-    private func configuireTableView() {
-        tableView.dataSource = presenter
-        tableView.delegate = self
     }
 
 }
