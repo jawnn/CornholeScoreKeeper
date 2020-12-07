@@ -13,6 +13,7 @@
 		D282FB272578257000C43E07 /* TurnIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282FB262578257000C43E07 /* TurnIndicatorView.swift */; };
 		D28569892579707100F43121 /* NewMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28569882579707100F43121 /* NewMatchModel.swift */; };
 		D285698D257999E100F43121 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285698C257999E100F43121 /* UIView+Extensions.swift */; };
+		D2856997257AF2B500F43121 /* CurrentMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */; };
 		D285699C257AFE3500F43121 /* MatchResultsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285699B257AFE3500F43121 /* MatchResultsTableCell.swift */; };
 		D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */; };
 		D2B34D472576EA62008DDB3F /* NewMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */; };
@@ -45,6 +46,7 @@
 		D282FB262578257000C43E07 /* TurnIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnIndicatorView.swift; sourceTree = "<group>"; };
 		D28569882579707100F43121 /* NewMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchModel.swift; sourceTree = "<group>"; };
 		D285698C257999E100F43121 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchPresenter.swift; sourceTree = "<group>"; };
 		D285699B257AFE3500F43121 /* MatchResultsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResultsTableCell.swift; sourceTree = "<group>"; };
 		D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchRouter.swift; sourceTree = "<group>"; };
 		D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchPresenter.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */,
+				D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */,
 			);
 			path = CurrentMatch;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				D2B35FDD256DBB1A00C1C05B /* CornholeScoreKeeper.xcdatamodeld in Sources */,
 				D2B35FF0256DBBDB00C1C05B /* MatchHistoryPresenter.swift in Sources */,
 				D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */,
+				D2856997257AF2B500F43121 /* CurrentMatchPresenter.swift in Sources */,
 				D2B36014256DD2A800C1C05B /* RootTabBarViewController.swift in Sources */,
 				D285699C257AFE3500F43121 /* MatchResultsTableCell.swift in Sources */,
 				D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */,
