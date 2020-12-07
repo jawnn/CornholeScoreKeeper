@@ -1,6 +1,12 @@
 import UIKit
 
+protocol AddNewPlayerProfileDelegate: class {
+    func addPlayerProfile(name: String)
+}
+
 class TextFieldHeaderView: UIView {
+
+    weak var delegate: AddNewPlayerProfileDelegate?
 
     let textField: UITextField = {
         let textField = UITextField(frame: .zero)
@@ -23,10 +29,7 @@ class TextFieldHeaderView: UIView {
         return button
     }()
 
-    let lineView: LineView = {
-        let lineView = LineView()
-        return lineView
-    }()
+    let lineView = LineView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +60,16 @@ class TextFieldHeaderView: UIView {
             lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
             lineView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+
+        addButton.addTarget(self, action: #selector(didTapAddProfileButton), for: .touchUpInside)
     }
 
+    @objc func didTapAddProfileButton() {
+        guard let input = textField.text, !input.isEmpty else {
+            print("player name cannot be blank")
+            return
+        }
+        textField.text = ""
+        delegate?.addPlayerProfile(name: input)
+    }
 }

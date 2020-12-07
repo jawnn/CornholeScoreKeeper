@@ -1,13 +1,13 @@
 import Foundation
 
 protocol NewMatchModelType {
-    var players: [String] { get set }
+    var players: [Player] { get set }
 }
 
 class NewMatchModel: NewMatchModelType {
-    var players: [String]
+    var players: [Player]
 
-    init(players: [String]) {
+    init(players: [Player]) {
         self.players = players
     }
 }

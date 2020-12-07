@@ -126,7 +126,9 @@ class NewMatchViewController: UIViewController {
 
 extension NewMatchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return TextFieldHeaderView()
+        let headerView = TextFieldHeaderView()
+        headerView.delegate = presenter
+        return headerView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -151,6 +153,10 @@ extension NewMatchViewController: UITableViewDelegate {
 }
 
 extension NewMatchViewController: NewMatchViewType {
+    func reloadTableData() {
+        playerSelectTableView.reloadData()
+    }
+
     func toggleTableViewVisibility() {
         playerSelectTableView.isHidden = !presenter.isSelecting
     }
