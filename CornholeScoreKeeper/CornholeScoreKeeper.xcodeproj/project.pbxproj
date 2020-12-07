@@ -37,6 +37,7 @@
 		D2B3600E256DC97300C1C05B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B3600D256DC97300C1C05B /* Record.swift */; };
 		D2B36014256DD2A800C1C05B /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B36013256DD2A800C1C05B /* RootTabBarViewController.swift */; };
 		D2B36019256DD35300C1C05B /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B36018256DD35300C1C05B /* NewMatchViewController.swift */; };
+		D2B7EA26257EE6700095EECC /* TextFieldHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		D2B3600D256DC97300C1C05B /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		D2B36013256DD2A800C1C05B /* RootTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
 		D2B36018256DD35300C1C05B /* NewMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchViewController.swift; sourceTree = "<group>"; };
+		D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				D2B34D542576F74A008DDB3F /* MatchScoreView.swift */,
 				D2B34D582576F8A3008DDB3F /* LineView.swift */,
 				D282FB262578257000C43E07 /* TurnIndicatorView.swift */,
+				D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				D2B36019256DD35300C1C05B /* NewMatchViewController.swift in Sources */,
 				D2B35FF9256DBFBE00C1C05B /* Archive.swift in Sources */,
 				D2B36004256DC05F00C1C05B /* Frame.swift in Sources */,
+				D2B7EA26257EE6700095EECC /* TextFieldHeaderView.swift in Sources */,
 				D2B3600A256DC09300C1C05B /* Pitcher.swift in Sources */,
 				D2B34D552576F74A008DDB3F /* MatchScoreView.swift in Sources */,
 			);
