@@ -1,17 +1,20 @@
 import Foundation
 
 class Pitcher {
-    
-    var name: String
-    var totalTosses: Int = 0
-    var totalIn: Int = 0
-    var totalOn: Int = 0
-    var totalOff: Int = 0
-    var totalFrames: Int = 0
-    var totalPointsGained: Int = 0
-    var totalPointsAgainst: Int = 0
+    var player: Player
+    var tossesLeft: Int = 4
+    var frameScore: Int = 0
+    var inThisFrame: Int = 0
+    var onThisFrame: Int = 0
+    var offThisFrame: Int = 0
+    var pointsGainedThisFrame: Int = 0
+    var pointsAgainstThisFrame: Int = 0
 
-    init(name: String = "") {
-        self.name = name
+    init(player: Player) {
+        self.player = player
+    }
+
+    func generateFrameScore() {
+        self.frameScore = (self.inThisFrame * 3) + (self.onThisFrame)
     }
 }
