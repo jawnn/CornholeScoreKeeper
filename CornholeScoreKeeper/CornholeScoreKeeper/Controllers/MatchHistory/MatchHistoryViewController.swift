@@ -5,6 +5,7 @@ class MatchHistoryViewController: UIViewController {
     private weak var tableView: UITableView!
 
     var presenter: MatchHistoryPresenter!
+    var router: MatchHistoryRouterType!
 
     override func loadView() {
         super.loadView()
@@ -52,7 +53,9 @@ class MatchHistoryViewController: UIViewController {
 }
 
 extension MatchHistoryViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router.toMatchDetailsViewController()
+    }
 }
 
 extension MatchHistoryViewController: MatchHistoryViewType {
