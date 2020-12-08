@@ -90,6 +90,7 @@ class NewMatchViewController: UIViewController {
     @objc func didChangeMatchType(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case MatchType.single.rawValue:
+            conformTeamsForSingleMatchTypeConfiguration()
             UIView.animate(withDuration: 0.20) {
                 self.teamSelectView.addRightBluePitcherButton.alpha = 0.50
                 self.teamSelectView.addRightBluePitcherButton.isEnabled = false
@@ -108,13 +109,22 @@ class NewMatchViewController: UIViewController {
         default:
             break
         }
+        animateStartButton()
+    }
 
+    private func conformTeamsForSingleMatchTypeConfiguration() {
+        if presenter.redTeam.players.count == 2 {
+            presenter.redTeam.players.removeLast()
+        }
+        if presenter.blueTeam.players.count == 2 {
+            presenter.blueTeam.players.removeLast()
+        }
     }
 
     private func configureStartButton() {
         startMatchButton.alpha = 0.25
         startMatchButton.isEnabled = false
-        startMatchButton.setTitle("Start Match", for: .normal)
+        startMatchButton.setTitle("Not enough players", for: .normal)
         startMatchButton.backgroundColor = .systemBlue
         startMatchButton.addTarget(self, action: #selector(didTapStartMatchButton), for: .touchUpInside)
     }
@@ -125,9 +135,23 @@ class NewMatchViewController: UIViewController {
         return totalPlayers == matchType.totalAllowedPlayers ? true : false
     }
 
+    private func animateStartButton() {
+        if shouldStartMatchButtonBeEnabled() {
+            UIView.animate(withDuration: 0.25) {
+                self.startMatchButton.alpha = 1
+                self.startMatchButton.isEnabled = true
+                self.startMatchButton.setTitle("Start match", for: .normal)
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.startMatchButton.alpha = 0.25
+                self.startMatchButton.isEnabled = false
+                self.startMatchButton.setTitle("Not enough players", for: .normal)
+            }
+        }
+    }
+
     @objc func didTapStartMatchButton() {
-        #warning("TODO")
-        // Should remain disabled and alpha 50% until player requirements are met for selected match type
         let matchType: MatchType = matchTypeSegmentController.selectedSegmentIndex == 0 ? .single : .doubles
         router.toCurrentMatchViewController(redTeam: presenter.redTeam, blueTeam: presenter.blueTeam, matchType: matchType)
     }
@@ -150,18 +174,7 @@ extension NewMatchViewController: UITableViewDelegate {
         presenter.appendPlayerToTeam(index: indexPath.row, tag: presenter.selectedButtonTag)
         presenter.isSelecting = false
         playerSelectTableView.isHidden = true
-
-        if shouldStartMatchButtonBeEnabled() {
-            UIView.animate(withDuration: 0.25) {
-                self.startMatchButton.alpha = 1
-                self.startMatchButton.isEnabled = true
-            }
-        } else {
-            UIView.animate(withDuration: 0.25) {
-                self.startMatchButton.alpha = 0.25
-                self.startMatchButton.isEnabled = false
-            }
-        }
+        animateStartButton()
     }
 }
 
