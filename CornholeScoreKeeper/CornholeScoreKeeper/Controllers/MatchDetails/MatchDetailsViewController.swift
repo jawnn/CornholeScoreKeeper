@@ -1,10 +1,3 @@
-//
-//  MatchDetailsViewController.swift
-//  CornholeScoreKeeper
-//
-//  Created by Roberto Manese III on 12/7/20.
-//
-
 import UIKit
 
 class MatchDetailsViewController: UIViewController {
