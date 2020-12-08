@@ -12,34 +12,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
         let matchHistoryVC: UINavigationController = {
-            let matchHistoryVC = MatchHistoryViewController()
-            let matchHistoryModel = MatchHistoryModel()
-            let matchHistoryPresenter = MatchHistoryPresenter(model: matchHistoryModel, view: matchHistoryVC)
-            matchHistoryVC.presenter = matchHistoryPresenter
-            matchHistoryVC.tabBarItem.title = "Match History"
-            matchHistoryVC.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle")
-            let navigationController = UINavigationController(rootViewController: matchHistoryVC)
+            let viewController = MatchHistoryViewController()
+            let router = MatchHistoryRouter(view: viewController)
+            let navigationController = router.navigationController
+            let model = MatchHistoryModel()
+            let presenter = MatchHistoryPresenter(model: model, view: viewController)
+            viewController.router = router
+            viewController.presenter = presenter
+            viewController.tabBarItem.title = "Match History"
+            viewController.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle")
             return navigationController
         }()
 
         let newMatchVC: UIViewController = {
-            let newMatchVC = NewMatchViewController()
-            let router = NewMatchRouter(view: newMatchVC)
+            let viewController = NewMatchViewController()
+            let router = NewMatchRouter(view: viewController)
             let navigationController = router.navigationController
             let model = NewMatchModel(players: Archive().players)
-            let presenter = NewMatchPresenter(model: model, view: newMatchVC)
-            newMatchVC.router = router
-            newMatchVC.presenter = presenter
-            navigationController.tabBarItem.title = "New Match"
-            navigationController.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
+            let presenter = NewMatchPresenter(model: model, view: viewController)
+            viewController.router = router
+            viewController.presenter = presenter
+            viewController.tabBarItem.title = "New Match"
+            viewController.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
             return navigationController
         }()
 
         let playerStatsVC: UIViewController = {
-            let playerStatsVC = PlayerStatsViewController()
-            playerStatsVC.tabBarItem.title = "Player Stats"
-            playerStatsVC.tabBarItem.image = UIImage(systemName: "chart.bar.xaxis")
-            return playerStatsVC
+            let viewController = PlayerStatsViewController()
+            viewController.tabBarItem.title = "Player Stats"
+            viewController.tabBarItem.image = UIImage(systemName: "chart.bar.xaxis")
+            return viewController
         }()
 
         let rootTabBarController = RootTabBarViewController()
