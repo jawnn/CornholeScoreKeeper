@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D240125B257F00DD008FDF07 /* CurrentMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */; };
 		D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */; };
 		D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93A256DDED900130192 /* PlayerStatsViewController.swift */; };
 		D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93D256DE10100130192 /* TeamSelectView.swift */; };
@@ -37,14 +38,15 @@
 		D2B3600E256DC97300C1C05B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B3600D256DC97300C1C05B /* Record.swift */; };
 		D2B36014256DD2A800C1C05B /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B36013256DD2A800C1C05B /* RootTabBarViewController.swift */; };
 		D2B36019256DD35300C1C05B /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B36018256DD35300C1C05B /* NewMatchViewController.swift */; };
-		D2B7EA26257EE6700095EECC /* TextFieldHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */; };
 		D2B7EA17257EBE9D0095EECC /* MatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA16257EBE9D0095EECC /* MatchDetailsViewController.swift */; };
 		D2B7EA1B257EBEB40095EECC /* MatchDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA1A257EBEB40095EECC /* MatchDetailsPresenter.swift */; };
 		D2B7EA1E257EBEC70095EECC /* MatchDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA1D257EBEC70095EECC /* MatchDetailsModel.swift */; };
 		D2B7EA21257EC0410095EECC /* MatchHistoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA20257EC0410095EECC /* MatchHistoryRouter.swift */; };
+		D2B7EA26257EE6700095EECC /* TextFieldHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchModel.swift; sourceTree = "<group>"; };
 		D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornholeBoardView.swift; sourceTree = "<group>"; };
 		D267B93A256DDED900130192 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		D267B93D256DE10100130192 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
@@ -77,11 +79,11 @@
 		D2B3600D256DC97300C1C05B /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		D2B36013256DD2A800C1C05B /* RootTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
 		D2B36018256DD35300C1C05B /* NewMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchViewController.swift; sourceTree = "<group>"; };
-		D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHeaderView.swift; sourceTree = "<group>"; };
 		D2B7EA16257EBE9D0095EECC /* MatchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewController.swift; sourceTree = "<group>"; };
 		D2B7EA1A257EBEB40095EECC /* MatchDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsPresenter.swift; sourceTree = "<group>"; };
 		D2B7EA1D257EBEC70095EECC /* MatchDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsModel.swift; sourceTree = "<group>"; };
 		D2B7EA20257EC0410095EECC /* MatchHistoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistoryRouter.swift; sourceTree = "<group>"; };
+		D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */,
 				D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */,
+				D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */,
 			);
 			path = CurrentMatch;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */,
 				D2B7EA17257EBE9D0095EECC /* MatchDetailsViewController.swift in Sources */,
 				D285698D257999E100F43121 /* UIView+Extensions.swift in Sources */,
+				D240125B257F00DD008FDF07 /* CurrentMatchModel.swift in Sources */,
 				D2B35FD5256DBB1A00C1C05B /* SceneDelegate.swift in Sources */,
 				D2B36007256DC07000C1C05B /* Team.swift in Sources */,
 				D2B36019256DD35300C1C05B /* NewMatchViewController.swift in Sources */,

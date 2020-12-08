@@ -1,6 +1,7 @@
 import Foundation
 
 class Frame {
+    var frameNumber: Int = 1
     var bluePitcher: Pitcher
     var redPitcher: Pitcher
 

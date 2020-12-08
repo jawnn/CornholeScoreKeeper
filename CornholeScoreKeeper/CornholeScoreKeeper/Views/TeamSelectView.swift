@@ -92,6 +92,21 @@ class TeamSelectView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func populatePitchButtonTitle(tag: Int, playerName: String) {
+        switch tag {
+        case AddPitcherButtonTag.leftBlueButton.rawValue:
+            addLeftBluePitcherButton.setTitle(playerName, for: .normal)
+        case AddPitcherButtonTag.leftRedButton.rawValue:
+            addLeftRedPitcherButton.setTitle(playerName, for: .normal)
+        case AddPitcherButtonTag.rightBlueButton.rawValue:
+            addRightBluePitcherButton.setTitle(playerName, for: .normal)
+        case AddPitcherButtonTag.rightRedButton.rawValue:
+            addRightRedPitcherButton.setTitle(playerName, for: .normal)
+        default:
+            break
+        }
+    }
+
     private func configureViewConstraints() {
         NSLayoutConstraint.activate([
             addLeftBluePitcherButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
