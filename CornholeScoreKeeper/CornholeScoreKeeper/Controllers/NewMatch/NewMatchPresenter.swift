@@ -1,11 +1,12 @@
 import UIKit
 
-protocol NewMatchPresenterType: UITableViewDataSource, TeamSelectViewDelegate {
+protocol NewMatchPresenterType: UITableViewDataSource, TeamSelectViewDelegate, AddNewPlayerProfileDelegate {
     var selectedButtonTag: Int { get set }
 }
 
 protocol NewMatchViewType {
     func toggleTableViewVisibility()
+    func reloadTableData()
 }
 
 class NewMatchPresenter: NSObject, NewMatchPresenterType {
@@ -29,16 +30,26 @@ extension NewMatchPresenter {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = model.players[indexPath.row]
+        cell.textLabel?.text = model.players[indexPath.row].name
         return cell
     }
 
 }
 
+// MARK: - TeamSelectView Delegate
 extension NewMatchPresenter {
     func placeSelectedPlayerOnTeam(tag: Int) {
         selectedButtonTag = tag
         isSelecting = true
         view.toggleTableViewVisibility()
+    }
+}
+
+// MARK: - AddPlayerProfile Delegate
+extension NewMatchPresenter {
+    func addPlayerProfile(name: String) {
+        let newPlayer = Player(name: name)
+        model.players.append(newPlayer)
+        view.reloadTableData()
     }
 }
