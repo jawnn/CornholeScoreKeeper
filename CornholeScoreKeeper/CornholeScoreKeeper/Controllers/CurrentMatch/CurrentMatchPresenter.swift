@@ -10,8 +10,10 @@ protocol CurrentMatchViewType {
 
 class CurrentMatchPresenter: CurrentMatchPresenterType {
     var view: CurrentMatchViewType
+    var model: CurrentMatchModelType
 
-    init(view: CurrentMatchViewType) {
+    init(model: CurrentMatchModelType, view: CurrentMatchViewType) {
+        self.model = model
         self.view = view
     }
 }

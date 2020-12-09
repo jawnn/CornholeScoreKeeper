@@ -2,7 +2,7 @@ import UIKit
 
 protocol NewMatchRouterType {
     var navigationController: UINavigationController { get set }
-    func toCurrentMatchViewController()
+    func toCurrentMatchViewController(redTeam: Team, blueTeam: Team, matchType: MatchType)
 }
 
 class NewMatchRouter: NewMatchRouterType {
@@ -14,9 +14,10 @@ class NewMatchRouter: NewMatchRouterType {
         self.navigationController = UINavigationController(rootViewController: view)
     }
 
-    func toCurrentMatchViewController() {
+    func toCurrentMatchViewController(redTeam: Team, blueTeam: Team, matchType: MatchType) {
         let viewController = CurrentMatchViewController()
-        let presenter = CurrentMatchPresenter(view: viewController)
+        let model = CurrentMatchModel(match: Match(redTeam: redTeam, blueTeam: blueTeam, matchType: matchType))
+        let presenter = CurrentMatchPresenter(model: model, view: viewController)
         viewController.presenter = presenter
         navigationController.pushViewController(viewController, animated: true)
     }

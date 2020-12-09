@@ -90,6 +90,7 @@ class NewMatchViewController: UIViewController {
     @objc func didChangeMatchType(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case MatchType.single.rawValue:
+            conformTeamsForSingleMatchTypeConfiguration()
             UIView.animate(withDuration: 0.20) {
                 self.teamSelectView.addRightBluePitcherButton.alpha = 0.50
                 self.teamSelectView.addRightBluePitcherButton.isEnabled = false
@@ -108,18 +109,51 @@ class NewMatchViewController: UIViewController {
         default:
             break
         }
+        animateStartButton()
+    }
+
+    private func conformTeamsForSingleMatchTypeConfiguration() {
+        if presenter.redTeam.players.count == 2 {
+            presenter.redTeam.players.removeLast()
+        }
+        if presenter.blueTeam.players.count == 2 {
+            presenter.blueTeam.players.removeLast()
+        }
     }
 
     private func configureStartButton() {
-        startMatchButton.setTitle("Start Match", for: .normal)
+        startMatchButton.alpha = 0.25
+        startMatchButton.isEnabled = false
+        startMatchButton.setTitle("Not enough players", for: .normal)
         startMatchButton.backgroundColor = .systemBlue
         startMatchButton.addTarget(self, action: #selector(didTapStartMatchButton), for: .touchUpInside)
     }
 
+    private func shouldStartMatchButtonBeEnabled() -> Bool {
+        let matchType: MatchType = matchTypeSegmentController.selectedSegmentIndex == 0 ? .single : .doubles
+        let totalPlayers = presenter.redTeam.players.count + presenter.blueTeam.players.count
+        return totalPlayers == matchType.totalAllowedPlayers ? true : false
+    }
+
+    private func animateStartButton() {
+        if shouldStartMatchButtonBeEnabled() {
+            UIView.animate(withDuration: 0.25) {
+                self.startMatchButton.alpha = 1
+                self.startMatchButton.isEnabled = true
+                self.startMatchButton.setTitle("Start match", for: .normal)
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.startMatchButton.alpha = 0.25
+                self.startMatchButton.isEnabled = false
+                self.startMatchButton.setTitle("Not enough players", for: .normal)
+            }
+        }
+    }
+
     @objc func didTapStartMatchButton() {
-        #warning("TODO")
-        // Should remain disabled and alpha 50% until player requirements are met for selected match type
-        router.toCurrentMatchViewController()
+        let matchType: MatchType = matchTypeSegmentController.selectedSegmentIndex == 0 ? .single : .doubles
+        router.toCurrentMatchViewController(redTeam: presenter.redTeam, blueTeam: presenter.blueTeam, matchType: matchType)
     }
 
 }
@@ -132,23 +166,15 @@ extension NewMatchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else {
+        guard let cell = tableView.cellForRow(at: indexPath),
+              let name = cell.textLabel?.text else {
             return
         }
-        switch presenter.selectedButtonTag {
-        case AddPitcherButtonTag.leftBlueButton.rawValue:
-            teamSelectView.addLeftBluePitcherButton.setTitle(cell.textLabel?.text, for: .normal)
-        case AddPitcherButtonTag.leftRedButton.rawValue:
-            teamSelectView.addLeftRedPitcherButton.setTitle(cell.textLabel?.text, for: .normal)
-        case AddPitcherButtonTag.rightBlueButton.rawValue:
-            teamSelectView.addRightBluePitcherButton.setTitle(cell.textLabel?.text, for: .normal)
-        case AddPitcherButtonTag.rightRedButton.rawValue:
-            teamSelectView.addRightRedPitcherButton.setTitle(cell.textLabel?.text, for: .normal)
-        default:
-            break
-        }
+        teamSelectView.populatePitchButtonTitle(tag: presenter.selectedButtonTag, playerName: name)
+        presenter.appendPlayerToTeam(index: indexPath.row, tag: presenter.selectedButtonTag)
         presenter.isSelecting = false
         playerSelectTableView.isHidden = true
+        animateStartButton()
     }
 }
 

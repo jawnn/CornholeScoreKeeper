@@ -1,7 +1,11 @@
 import UIKit
 
 protocol NewMatchPresenterType: UITableViewDataSource, TeamSelectViewDelegate, AddNewPlayerProfileDelegate {
+    var redTeam: Team { get set }
+    var blueTeam: Team { get set }
     var selectedButtonTag: Int { get set }
+
+    func appendPlayerToTeam(index: Int, tag: Int)
 }
 
 protocol NewMatchViewType {
@@ -13,13 +17,28 @@ class NewMatchPresenter: NSObject, NewMatchPresenterType {
     var model: NewMatchModelType
     var view: NewMatchViewType
 
-    var selectedButtonTag: Int = 0
     var isSelecting: Bool = false
+    var selectedButtonTag: Int = 0
+    var redTeam: Team = Team(color: .red)
+    var blueTeam: Team = Team(color: .blue)
 
     init(model: NewMatchModelType, view: NewMatchViewType) {
         self.model = model
         self.view = view
     }
+
+    func appendPlayerToTeam(index: Int, tag: Int) {
+        let pitcher = Pitcher(player: model.players[index])
+        switch tag {
+        case AddPitcherButtonTag.leftBlueButton.rawValue, AddPitcherButtonTag.rightBlueButton.rawValue:
+            blueTeam.players.append(pitcher)
+        case AddPitcherButtonTag.leftRedButton.rawValue, AddPitcherButtonTag.rightRedButton.rawValue:
+            redTeam.players.append(pitcher)
+        default:
+            break
+        }
+    }
+
 }
 
 // MARK: - Player Select TableViewDataSource

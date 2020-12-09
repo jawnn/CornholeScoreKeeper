@@ -19,10 +19,10 @@ enum TeamColor: Int {
 
 class Team {
     var score: Int = 0
-    var color: TeamColor = .none
     var players: [Pitcher] = []
+    var color: TeamColor
 
-    init(players: [Pitcher]) {
-        self.players = players
+    init(color: TeamColor) {
+        self.color = color
     }
 }
