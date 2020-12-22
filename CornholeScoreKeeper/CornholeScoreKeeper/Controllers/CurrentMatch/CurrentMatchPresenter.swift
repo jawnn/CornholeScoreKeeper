@@ -24,8 +24,9 @@ extension CurrentMatchPresenter {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "1234"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FrameTableCell.self)) as? FrameTableCell else {
+            return UITableViewCell()
+        }
         return cell
     }
 }

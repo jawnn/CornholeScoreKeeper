@@ -38,7 +38,7 @@ class CurrentMatchViewController: UIViewController {
             turnIndicatorSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             turnIndicatorSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
 
-            bagTossOutcomeSectionView.heightAnchor.constraint(equalToConstant: 200),
+//            bagTossOutcomeSectionView.heightAnchor.constraint(equalToConstant: 200),
             bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             bagTossOutcomeSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             bagTossOutcomeSectionView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -16),
@@ -75,6 +75,8 @@ class CurrentMatchViewController: UIViewController {
         frameHistoryTableView.backgroundColor = .blue
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.delegate = self
+
+        frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
 
     private func configureRoundCompleteButton() {

@@ -1,8 +1,12 @@
 import Foundation
 
+enum BagOutcome: Int {
+    case off, woody, cornhole
+}
+
 class Pitcher {
     var player: Player
-    var tossesLeft: Int = 4
+    var tossOutcomes: [BagOutcome] = [.off, .off, .off, .off]
     var frameScore: Int = 0
     var inThisFrame: Int = 0
     var onThisFrame: Int = 0

@@ -5,15 +5,15 @@ protocol IncrementScoreDelegate: class {
 }
 
 enum BagOutcomeButton: Int, CaseIterable {
-    case blueRowOneOff, blueRowOneOn, blueRowOneIn
-    case blueRowTwoOff, blueRowTwoOn, blueRowTwoIn
-    case blueRowThreeOff, blueRowThreeOn, blueRowThreeIn
-    case blueRowFourOff, blueRowFourOn, blueRowFourIn
+    case blueRowOneOn, blueRowOneIn
+    case blueRowTwoOn, blueRowTwoIn
+    case blueRowThreeOn, blueRowThreeIn
+    case blueRowFourOn, blueRowFourIn
 
-    case redRowOneOff, redRowOneOn, redRowOneIn
-    case redRowTwoOff, redRowTwoOn, redRowTwoIn
-    case redRowThreeOff, redRowThreeOn, redRowThreeIn
-    case redRowFourOff, redRowFourOn, redRowFourIn
+    case redRowOneOn, redRowOneIn
+    case redRowTwoOn, redRowTwoIn
+    case redRowThreeOn, redRowThreeIn
+    case redRowFourOn, redRowFourIn
 }
 
 enum IncrementScoreButton: Int {
@@ -61,8 +61,8 @@ class BagTossOutcomeSectionView: UIView {
     private func configureViewConstraints() {
         NSLayoutConstraint.activate([
             blueButtonsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-//            blueButtonsStackView.widthAnchor.constraint(equalToConstant: 150),
-            blueButtonsStackView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -8),
+            blueButtonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            blueButtonsStackView.trailingAnchor.constraint(equalTo: lineView.leadingAnchor, constant: -8),
             blueButtonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
 
             lineView.widthAnchor.constraint(equalToConstant: 1),
@@ -71,7 +71,7 @@ class BagTossOutcomeSectionView: UIView {
             lineView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             redButtonsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            redButtonsStackView.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 8),
+            redButtonsStackView.leadingAnchor.constraint(equalTo: lineView.trailingAnchor, constant: 8),
             redButtonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
             redButtonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
         ])
@@ -79,7 +79,7 @@ class BagTossOutcomeSectionView: UIView {
     }
 
     private func layoutHeaderLabelsForStackViews(stackView: UIStackView, shouldReverse: Bool) {
-        let titles: [String] = shouldReverse ? ["On", "In"] : ["In", "On"]
+        let titles: [String] = shouldReverse ? ["On", "In", "Off"] : [ "Off", "In", "On"]
         let headerStackView = UIStackView(frame: .zero)
         headerStackView.spacing = 5
         headerStackView.axis = .horizontal
@@ -87,6 +87,7 @@ class BagTossOutcomeSectionView: UIView {
         for title in titles {
             let label = UILabel(frame: .zero)
             label.text = title
+            label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
             label.textAlignment = .center
             headerStackView.addArrangedSubview(label)
         }
@@ -97,40 +98,43 @@ class BagTossOutcomeSectionView: UIView {
         var tagIndex = 0
         for _ in 1...4 {
             let rowStackView = UIStackView(frame: .zero)
-            rowStackView.spacing = 0
+            rowStackView.spacing = 2
             rowStackView.axis = .horizontal
-            rowStackView.distribution = .fillEqually
-            for i in 1...2 {
+            rowStackView.distribution = .equalSpacing
+            for _ in 1...3 {
                 let button = UIButton(frame: .zero)
-                #warning("Last Checkpoint: Trying to figure out how to size the buttons within the stackView. Should investigate how to use autolayout in sync with stackview.")
-//                button.translatesAutoresizingMaskIntoConstraints = false
-//                button.heightAnchor.constraint(equalToConstant: 50).isActive = true
                 button.tag = tagIndex
                 button.layer.borderWidth = 2
                 button.layer.borderColor = UIColor.blue.cgColor
-                button.layer.cornerRadius = 25
+                button.layer.cornerRadius = 24
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.heightAnchor.constraint(equalToConstant: 48).isActive = true
+                button.widthAnchor.constraint(equalToConstant: 48).isActive = true
                 rowStackView.addArrangedSubview(button)
                 tagIndex += 1
             }
             blueButtonsStackView.addArrangedSubview(rowStackView)
         }
 
-//        for _ in 1...4 {
-//            let rowStackView = UIStackView(frame: .zero)
-//            rowStackView.spacing = 20
-//            rowStackView.axis = .horizontal
-//            rowStackView.distribution = .equalSpacing
-//            for i in 1...2 {
-//                let button = UIButton(frame: .zero)
-//                button.layer.cornerRadius = 16
-//                button.layer.borderWidth = 2
-//                button.layer.borderColor = UIColor.red.cgColor
-//                button.tag = tagIndex
-//                rowStackView.addArrangedSubview(button)
-//                tagIndex += 1
-//            }
-//            redButtonsStackView.addArrangedSubview(rowStackView)
-//        }
+        for _ in 1...4 {
+            let rowStackView = UIStackView(frame: .zero)
+            rowStackView.spacing = 2
+            rowStackView.axis = .horizontal
+            rowStackView.distribution = .equalSpacing
+            for _ in 1...3 {
+                let button = UIButton(frame: .zero)
+                button.tag = tagIndex
+                button.layer.borderWidth = 2
+                button.layer.borderColor = UIColor.red.cgColor
+                button.layer.cornerRadius = 24
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.heightAnchor.constraint(equalToConstant: 48).isActive = true
+                button.widthAnchor.constraint(equalToConstant: 48).isActive = true
+                rowStackView.addArrangedSubview(button)
+                tagIndex += 1
+            }
+            redButtonsStackView.addArrangedSubview(rowStackView)
+        }
     }
 
     @objc func didTapScoreButton(sender: UIButton) {
