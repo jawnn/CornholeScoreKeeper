@@ -12,7 +12,7 @@ class FrameTableCell: UITableViewCell {
     let frameNumberLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = "1"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -22,15 +22,15 @@ class FrameTableCell: UITableViewCell {
     let bluePitchLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = "Bugcat - 6"
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let redPitcherLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "Pusheen - 2"
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.text = "2 - Pusheen"
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,6 +48,7 @@ class FrameTableCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: String(describing: FrameTableCell.self))
+        selectionStyle = .none
         configureSubviews()
     }
 
@@ -62,27 +63,28 @@ class FrameTableCell: UITableViewCell {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            frameNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6),
+            frameNumberLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             frameNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
 
-            leftLineView.leadingAnchor.constraint(equalTo: frameNumberLabel.trailingAnchor, constant: 2),
-            leftLineView.topAnchor.constraint(equalTo: topAnchor),
-            leftLineView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            leftLineView.leadingAnchor.constraint(equalTo: frameNumberLabel.trailingAnchor, constant: 6),
             leftLineView.widthAnchor.constraint(equalToConstant: 1),
+            leftLineView.heightAnchor.constraint(equalToConstant: 50),
 
-            bluePitchLabel.leadingAnchor.constraint(equalTo: leftLineView.trailingAnchor, constant: 4),
-            bluePitchLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6),
+            bluePitchLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            bluePitchLabel.leadingAnchor.constraint(equalTo: leftLineView.trailingAnchor, constant: 12),
+            bluePitchLabel.trailingAnchor.constraint(lessThanOrEqualTo: centerXAnchor, constant: -6),
 
-            redPitcherLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6),
-            redPitcherLabel.trailingAnchor.constraint(equalTo: rightLineView.leadingAnchor, constant: -4),
+            redPitcherLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            redPitcherLabel.trailingAnchor.constraint(equalTo: rightLineView.leadingAnchor, constant: -12),
+            redPitcherLabel.leadingAnchor.constraint(greaterThanOrEqualTo: centerXAnchor, constant: 6),
 
-            rightLineView.trailingAnchor.constraint(equalTo: frameOutcomeLabel.leadingAnchor, constant: -2),
-            rightLineView.topAnchor.constraint(equalTo: topAnchor),
-            rightLineView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            rightLineView.trailingAnchor.constraint(equalTo: frameOutcomeLabel.leadingAnchor, constant: -6),
             rightLineView.widthAnchor.constraint(equalToConstant: 1),
+            rightLineView.heightAnchor.constraint(equalToConstant: 50),
 
+            frameOutcomeLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             frameOutcomeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6),
-            frameOutcomeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6)
         ])
     }
 

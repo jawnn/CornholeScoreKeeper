@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D240125B257F00DD008FDF07 /* CurrentMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */; };
 		D2488978259284A100BCBEDA /* FrameTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2488977259284A100BCBEDA /* FrameTableCell.swift */; };
+		D2587108259A7032006B6E1E /* FrameHistoryTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */; };
 		D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */; };
 		D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93A256DDED900130192 /* PlayerStatsViewController.swift */; };
 		D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267B93D256DE10100130192 /* TeamSelectView.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchModel.swift; sourceTree = "<group>"; };
 		D2488977259284A100BCBEDA /* FrameTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTableCell.swift; sourceTree = "<group>"; };
+		D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHistoryTableHeaderView.swift; sourceTree = "<group>"; };
 		D2656EE4256E07E400DCFCBC /* CornholeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornholeBoardView.swift; sourceTree = "<group>"; };
 		D267B93A256DDED900130192 /* PlayerStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsViewController.swift; sourceTree = "<group>"; };
 		D267B93D256DE10100130192 /* TeamSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				D282FB262578257000C43E07 /* BagTossOutcomeSectionView.swift */,
 				D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */,
 				D289C74925819CEA00A7F5A5 /* TurnIndicationSectionView.swift */,
+				D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D2B35FED256DBBB800C1C05B /* MatchHistoryViewController.swift in Sources */,
 				D2B3600E256DC97300C1C05B /* Record.swift in Sources */,
 				D267B93E256DE10200130192 /* TeamSelectView.swift in Sources */,
+				D2587108259A7032006B6E1E /* FrameHistoryTableHeaderView.swift in Sources */,
 				D2B7EA17257EBE9D0095EECC /* MatchDetailsViewController.swift in Sources */,
 				D285698D257999E100F43121 /* UIView+Extensions.swift in Sources */,
 				D240125B257F00DD008FDF07 /* CurrentMatchModel.swift in Sources */,

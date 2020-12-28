@@ -72,9 +72,11 @@ class CurrentMatchViewController: UIViewController {
     }
 
     private func configureFrameHistoryTableView() {
-        frameHistoryTableView.backgroundColor = .blue
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.delegate = self
+
+        frameHistoryTableView.tableHeaderView = FrameHistoryTableHeaderView()
+        frameHistoryTableView.separatorStyle = .none
 
         frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
