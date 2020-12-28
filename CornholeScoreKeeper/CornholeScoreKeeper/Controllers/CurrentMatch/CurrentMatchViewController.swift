@@ -3,7 +3,9 @@ import UIKit
 class CurrentMatchViewController: UIViewController {
 
     private weak var matchScoreSection: MatchScoreView!
-    private weak var turnIndicatorView: TurnIndicatorView!
+    private weak var frameHistoryTableView: UITableView!
+    private weak var turnIndicatorSectionView: TurnIndicationSectionView!
+    private weak var bagTossOutcomeSectionView: BagTossOutcomeSectionView!
     private weak var completeRoundButton: UIButton!
 
     var presenter: CurrentMatchPresenterType!
@@ -12,20 +14,34 @@ class CurrentMatchViewController: UIViewController {
         super.loadView()
 
         let matchScoreView = MatchScoreView(frame: .zero)
-        let turnIndicatorView = TurnIndicatorView(frame: .zero)
+        let frameHistoryTableView = UITableView(frame: .zero)
+        let turnIndicatorSectionView = TurnIndicationSectionView(frame: .zero)
+        let bagTossOutcomeSectionView = BagTossOutcomeSectionView(frame: .zero)
         let completeRoundButton = UIButton(frame: .zero)
+
+        frameHistoryTableView.translatesAutoresizingMaskIntoConstraints = false
         completeRoundButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubviews(matchScoreView, turnIndicatorView, completeRoundButton)
+        view.addSubviews(matchScoreView, frameHistoryTableView, turnIndicatorSectionView, bagTossOutcomeSectionView, completeRoundButton)
 
         NSLayoutConstraint.activate([
             matchScoreView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             matchScoreView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             matchScoreView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
 
-            turnIndicatorView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -16),
-            turnIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            turnIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            turnIndicatorView.heightAnchor.constraint(equalToConstant: 200),
+            frameHistoryTableView.heightAnchor.constraint(equalToConstant: 100),
+            frameHistoryTableView.topAnchor.constraint(equalTo: matchScoreView.bottomAnchor, constant: 8),
+            frameHistoryTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            frameHistoryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+
+            turnIndicatorSectionView.heightAnchor.constraint(equalToConstant: 100),
+            turnIndicatorSectionView.topAnchor.constraint(equalTo: frameHistoryTableView.bottomAnchor, constant: 8),
+            turnIndicatorSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            turnIndicatorSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+
+//            bagTossOutcomeSectionView.heightAnchor.constraint(equalToConstant: 200),
+            bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            bagTossOutcomeSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            bagTossOutcomeSectionView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -16),
 
             completeRoundButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             completeRoundButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -34,22 +50,35 @@ class CurrentMatchViewController: UIViewController {
         ])
 
         self.matchScoreSection = matchScoreView
-        self.turnIndicatorView = turnIndicatorView
+        self.frameHistoryTableView = frameHistoryTableView
+        self.turnIndicatorSectionView = turnIndicatorSectionView
+        self.bagTossOutcomeSectionView = bagTossOutcomeSectionView
         self.completeRoundButton = completeRoundButton
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        turnIndicatorView.delegate = presenter
+        configureFrameHistoryTableView()
+        bagTossOutcomeSectionView.delegate = presenter
         matchScoreSection.backgroundColor = .systemGray5
         matchScoreSection.layer.cornerRadius = 10
 
-        turnIndicatorView.backgroundColor = .systemGray5
-        turnIndicatorView.layer.cornerRadius = 10
+        bagTossOutcomeSectionView.backgroundColor = .systemGray5
+        bagTossOutcomeSectionView.layer.cornerRadius = 10
         view.backgroundColor = .white
 
         configureRoundCompleteButton()
+    }
+
+    private func configureFrameHistoryTableView() {
+        frameHistoryTableView.dataSource = presenter
+        frameHistoryTableView.delegate = self
+
+        frameHistoryTableView.tableHeaderView = FrameHistoryTableHeaderView()
+        frameHistoryTableView.separatorStyle = .none
+
+        frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
 
     private func configureRoundCompleteButton() {
@@ -61,6 +90,10 @@ class CurrentMatchViewController: UIViewController {
     @objc func didTapCompleteRoundButton() {
         
     }
+
+}
+
+extension CurrentMatchViewController: UITableViewDelegate {
 
 }
 

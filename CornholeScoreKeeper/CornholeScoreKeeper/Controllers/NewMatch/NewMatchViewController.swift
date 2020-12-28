@@ -123,7 +123,7 @@ class NewMatchViewController: UIViewController {
 
     private func configureStartButton() {
         startMatchButton.alpha = 0.25
-        startMatchButton.isEnabled = false
+        startMatchButton.isEnabled = true
         startMatchButton.setTitle("Not enough players", for: .normal)
         startMatchButton.backgroundColor = .systemBlue
         startMatchButton.addTarget(self, action: #selector(didTapStartMatchButton), for: .touchUpInside)
