@@ -46,6 +46,7 @@
 		D2B7EA1E257EBEC70095EECC /* MatchDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA1D257EBEC70095EECC /* MatchDetailsModel.swift */; };
 		D2B7EA21257EC0410095EECC /* MatchHistoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA20257EC0410095EECC /* MatchHistoryRouter.swift */; };
 		D2B7EA26257EE6700095EECC /* TextFieldHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */; };
+		D2E59548259BF1A6000CACF0 /* BagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E59547259BF1A6000CACF0 /* BagButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		D2B7EA1D257EBEC70095EECC /* MatchDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsModel.swift; sourceTree = "<group>"; };
 		D2B7EA20257EC0410095EECC /* MatchHistoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistoryRouter.swift; sourceTree = "<group>"; };
 		D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHeaderView.swift; sourceTree = "<group>"; };
+		D2E59547259BF1A6000CACF0 /* BagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 				D2B7EA25257EE6700095EECC /* TextFieldHeaderView.swift */,
 				D289C74925819CEA00A7F5A5 /* TurnIndicationSectionView.swift */,
 				D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */,
+				D2E59547259BF1A6000CACF0 /* BagButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */,
 				D2B35FF3256DBBEB00C1C05B /* MatchHistoryModel.swift in Sources */,
 				D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */,
+				D2E59548259BF1A6000CACF0 /* BagButton.swift in Sources */,
 				D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */,
 				D28569892579707100F43121 /* NewMatchModel.swift in Sources */,
 				D282FB272578257000C43E07 /* BagTossOutcomeSectionView.swift in Sources */,

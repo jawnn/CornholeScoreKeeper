@@ -1,19 +1,38 @@
 import UIKit
 
 protocol IncrementScoreDelegate: class {
-    func incrementScoreAndUpdateLabel(tag: Int)
+    func didTapBagOutcomeButton(tag: Int)
 }
 
 enum BagOutcomeButton: Int, CaseIterable {
-    case blueRowOneOn, blueRowOneIn
-    case blueRowTwoOn, blueRowTwoIn
-    case blueRowThreeOn, blueRowThreeIn
-    case blueRowFourOn, blueRowFourIn
+    case blueRowOneOff, blueRowOneOn, blueRowOneIn
+    case blueRowTwoOff, blueRowTwoOn, blueRowTwoIn
+    case blueRowThreeOff, blueRowThreeOn, blueRowThreeIn
+    case blueRowFourOff, blueRowFourOn, blueRowFourIn
 
-    case redRowOneOn, redRowOneIn
-    case redRowTwoOn, redRowTwoIn
-    case redRowThreeOn, redRowThreeIn
-    case redRowFourOn, redRowFourIn
+    case redRowOneOn, redRowOneIn, redRowOneOff
+    case redRowTwoOn, redRowTwoIn, redRowTwoOff
+    case redRowThreeOn, redRowThreeIn, redRowThreeOff
+    case redRowFourOn, redRowFourIn, redRowFourOff
+
+    var populateAtStart: Bool {
+        switch self {
+        case .blueRowOneOff, .blueRowTwoOff, .blueRowThreeOff, .blueRowFourOff,
+             .redRowOneOff, .redRowTwoOff, .redRowThreeOff, .redRowFourOff:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var buttonColor: UIColor {
+        switch self {
+        case .blueRowOneOff, .blueRowOneOn, .blueRowOneIn, .blueRowTwoOff, .blueRowTwoOn, .blueRowTwoIn, .blueRowThreeOff, .blueRowThreeOn, .blueRowThreeIn, .blueRowFourOff, .blueRowFourOn, .blueRowFourIn:
+            return UIColor.blue
+        case .redRowOneOff, .redRowOneOn, .redRowOneIn, .redRowTwoOff, .redRowTwoOn, .redRowTwoIn, .redRowThreeOff, .redRowThreeOn, .redRowThreeIn, .redRowFourOff, .redRowFourOn, .redRowFourIn:
+            return UIColor.red
+        }
+    }
 }
 
 enum IncrementScoreButton: Int {
@@ -95,6 +114,7 @@ class BagTossOutcomeSectionView: UIView {
     }
 
     private func configureButtonStackViews() {
+        let buttonTags = BagOutcomeButton.allCases
         var tagIndex = 0
         for _ in 1...4 {
             let rowStackView = UIStackView(frame: .zero)
@@ -102,14 +122,9 @@ class BagTossOutcomeSectionView: UIView {
             rowStackView.axis = .horizontal
             rowStackView.distribution = .equalSpacing
             for _ in 1...3 {
-                let button = UIButton(frame: .zero)
-                button.tag = tagIndex
-                button.layer.borderWidth = 2
-                button.layer.borderColor = UIColor.blue.cgColor
-                button.layer.cornerRadius = 24
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 48).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 48).isActive = true
+                let bag = buttonTags[tagIndex]
+                let button = BagButton(frame: .zero, bag: bag)
+                button.addTarget(self, action: #selector(didTapBagOutcomeButton(sender:)), for: .touchUpInside)
                 rowStackView.addArrangedSubview(button)
                 tagIndex += 1
             }
@@ -122,14 +137,9 @@ class BagTossOutcomeSectionView: UIView {
             rowStackView.axis = .horizontal
             rowStackView.distribution = .equalSpacing
             for _ in 1...3 {
-                let button = UIButton(frame: .zero)
-                button.tag = tagIndex
-                button.layer.borderWidth = 2
-                button.layer.borderColor = UIColor.red.cgColor
-                button.layer.cornerRadius = 24
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 48).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 48).isActive = true
+                let bag = buttonTags[tagIndex]
+                let button = BagButton(frame: .zero, bag: bag)
+                button.addTarget(self, action: #selector(didTapBagOutcomeButton(sender:)), for: .touchUpInside)
                 rowStackView.addArrangedSubview(button)
                 tagIndex += 1
             }
@@ -137,8 +147,19 @@ class BagTossOutcomeSectionView: UIView {
         }
     }
 
-    @objc func didTapScoreButton(sender: UIButton) {
-        delegate?.incrementScoreAndUpdateLabel(tag: sender.tag)
+    @objc func didTapBagOutcomeButton(sender: UIButton) {
+
+        switch sender.tag {
+        case 0...11:
+            sender.backgroundColor = sender.backgroundColor == .white ? .blue : .white
+            print("Blue")
+        case 12...23:
+            sender.backgroundColor = sender.backgroundColor == .white ? .red : .white
+            print("Red")
+        default:
+            print("Invalid")
+        }
+        delegate?.didTapBagOutcomeButton(tag: sender.tag)
     }
 
 }
