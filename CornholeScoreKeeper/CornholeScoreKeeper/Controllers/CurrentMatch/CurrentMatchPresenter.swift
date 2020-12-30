@@ -32,7 +32,7 @@ extension CurrentMatchPresenter {
 }
 
 extension CurrentMatchPresenter {
-    func incrementScoreAndUpdateLabel(tag: Int) {
+    func didTapBagOutcomeButton(tag: Int) {
         view.updateScoreLabel(tag: tag)
     }
 }
