@@ -77,9 +77,6 @@ class CurrentMatchViewController: UIViewController {
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.delegate = self
 
-//        frameHistoryTableView.tableHeaderView = FrameHistoryTableHeaderView()
-        frameHistoryTableView.separatorStyle = .none
-
         frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
 
