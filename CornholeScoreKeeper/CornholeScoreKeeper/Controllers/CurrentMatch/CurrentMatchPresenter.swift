@@ -9,8 +9,7 @@ protocol CurrentMatchPresenterType: UITableViewDataSource, ScoreOutcomeDelegate 
 protocol CurrentMatchViewType {
     func reloadFrameHistoryData()
     func updateScore(for stepper: ScoreStepperTag, with value: Int, frameScore: Int)
-    func updatePitcherNameLabel(bluePitcher: String, redPitcher: String)
-    func populateViewsForNextFrame(bluePlayerName: String, redPlayerName: String, blueTeamMatchScore: Int, redTeamMatchScore: Int)
+    func populateViewsForNextFrame(bluePitcher name: String, redPitcher name: String, blueTeam score: Int, redTeam score: Int)
 }
 
 class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
@@ -24,10 +23,10 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
 
     func sendNewFrameData() {
         view.populateViewsForNextFrame(
-            bluePlayerName: model.currentFrame.bluePitcher.player.name,
-            redPlayerName: model.currentFrame.redPitcher.player.name,
-            blueTeamMatchScore: model.currentMatch.blueTeam.score,
-            redTeamMatchScore: model.currentMatch.redTeam.score
+            bluePitcher: model.currentFrame.bluePitcher.player.name,
+            redPitcher: model.currentFrame.redPitcher.player.name,
+            blueTeam: model.currentMatch.blueTeam.score,
+            redTeam: model.currentMatch.redTeam.score
         )
     }
 
@@ -44,7 +43,7 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
 
         model.currentMatch.currentFrameNumber += 1
         model.currentMatch.frames.insert(currentFrame, at: 0)
-        let frame = Frame(frame: model.currentFrameNumber, bluePitcher: model.blueTeam.players[model.currentPitcherIndex], redPitcher: model.redTeam.players[model.currentPitcherIndex])
+        let frame = Frame(frame: model.currentMatch.currentFrameNumber, bluePitcher: model.blueTeam.players[model.currentPitcherIndex], redPitcher: model.redTeam.players[model.currentPitcherIndex])
         model.currentFrame = frame
 
         view.reloadFrameHistoryData()

@@ -26,8 +26,8 @@ class NewMatchPresenter: NSObject, NewMatchPresenterType {
         self.model = model
         self.view = view
 
-        self.redTeam.players = [Pitcher(player: Player(name: "Red"))]
-        self.blueTeam.players = [Pitcher(player: Player(name: "Blue"))]
+        self.redTeam.players = []
+        self.blueTeam.players = []
     }
 
     func appendPlayerToTeam(index: Int, tag: Int) {

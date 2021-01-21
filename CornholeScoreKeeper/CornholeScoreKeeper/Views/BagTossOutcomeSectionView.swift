@@ -114,11 +114,7 @@ class BagTossOutcomeSectionView: UIView {
             break
         }
     }
-
-    func resetView() {
-
-    }
-
+    
     private func manageScoreStepperState(_ onStepper: UIStepper, _ inStepper: UIStepper) {
         let maxNumberOfTossesPerRound = 4.0
         onStepper.maximumValue = maxNumberOfTossesPerRound - inStepper.value
