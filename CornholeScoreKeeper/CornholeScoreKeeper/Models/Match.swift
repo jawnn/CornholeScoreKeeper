@@ -37,7 +37,7 @@ class Match {
             if self.matchType == .single {
                 return 0
             } else {
-                return self.currentFrameNumber % 2 == 0 ? 0 : 1
+                return self.currentFrameNumber % 2 == 0 ? 1 : 0
             }
         }
     }
@@ -47,11 +47,7 @@ class Match {
         self.blueTeam = blueTeam
         self.matchType = matchType
 
-        self.frames = [
-            Frame(frame: currentFrameNumber, bluePitcher: blueTeam.players[currentPitcherIndex],
-                  redPitcher: redTeam.players[currentPitcherIndex]
-            )
-        ]
+        self.frames = []
     }
 
     func generateMatchSore(scoringTeam: TeamColor, points: Int) {

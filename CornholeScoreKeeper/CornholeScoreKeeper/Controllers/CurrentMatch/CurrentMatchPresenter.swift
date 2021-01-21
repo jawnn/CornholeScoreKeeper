@@ -38,12 +38,13 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
 
         guard model.blueTeam.score < 21 && model.redTeam.score < 21 else {
             print("a team has won")
+            sendNewFrameData()
             return
         }
 
-        model.currentFrameNumber += 1
+        model.currentMatch.currentFrameNumber += 1
+        model.currentMatch.frames.insert(currentFrame, at: 0)
         let frame = Frame(frame: model.currentFrameNumber, bluePitcher: model.blueTeam.players[model.currentPitcherIndex], redPitcher: model.redTeam.players[model.currentPitcherIndex])
-        model.currentMatch.frames.insert(frame, at: 0)
         model.currentFrame = frame
 
         view.reloadFrameHistoryData()
@@ -54,22 +55,22 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
 
 extension CurrentMatchPresenter {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard model.currentMatch.frames.count != 1 else {
-            return 0
-        }
-        return model.currentMatch.frames.count - 1 
+        return model.currentMatch.frames.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FrameTableCell.self)) as? FrameTableCell else {
             return UITableViewCell()
         }
+
         let currentFrame = model.currentMatch.frames[indexPath.row]
-        cell.frameNumberLabel.text = "\(currentFrame.frameNumber)"
-        cell.bluePitchLabel.text = "\(currentFrame.bluePitcher.player.name) - \(currentFrame.bluePitcher.frameScore)"
-        cell.redPitcherLabel.text = "\(currentFrame.redPitcher.player.name) - \(currentFrame.redPitcher.frameScore)"
-        cell.frameOutcomeLabel.text = "\(currentFrame.generatePlusMinus())"
-        cell.frameOutcomeLabel.textColor = currentFrame.scoringTeam.color
+        cell.layoutViewConfigurations(scoringTeam: currentFrame.scoringTeam)
+        cell.frameOutcomeLabel.text = "+\(currentFrame.generatePlusMinus())"
+        cell.bluePitcherLabel.text = currentFrame.bluePitcher.player.name
+        cell.blueScoreLabel.text = "\(currentFrame.bluePitcher.frameScore)"
+        cell.redPitcherLabel.text = currentFrame.redPitcher.player.name
+        cell.redScoreLabel.text = "\(currentFrame.redPitcher.frameScore)"
+        cell.frameNumberLabel.text = "Fr. \(currentFrame.frameNumber)"
         return cell
     }
 }

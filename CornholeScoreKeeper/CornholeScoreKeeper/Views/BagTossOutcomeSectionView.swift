@@ -15,7 +15,7 @@ class BagTossOutcomeSectionView: UIView {
 
     let blueOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "On: 0"
+        label.text = "ON: 0"
         label.font = .systemFont(ofSize: 24, weight: .medium)
         label.textColor = .systemBlue
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class BagTossOutcomeSectionView: UIView {
 
     let blueInLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "In: 0"
+        label.text = "IN: 0"
         label.font = .systemFont(ofSize: 24, weight: .medium)
         label.textColor = .systemBlue
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ class BagTossOutcomeSectionView: UIView {
 
     let redOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "On: 0"
+        label.text = "ON: 0"
         label.font = .systemFont(ofSize: 24, weight: .medium)
         label.textColor = .systemRed
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class BagTossOutcomeSectionView: UIView {
 
     let redInLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "In: 0"
+        label.text = "IN: 0"
         label.font = .systemFont(ofSize: 24, weight: .medium)
         label.textColor = .systemRed
         label.translatesAutoresizingMaskIntoConstraints = false
