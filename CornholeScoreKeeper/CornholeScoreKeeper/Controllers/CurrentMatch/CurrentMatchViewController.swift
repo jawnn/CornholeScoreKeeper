@@ -32,13 +32,12 @@ class CurrentMatchViewController: UIViewController {
             frameHistoryTableView.topAnchor.constraint(equalTo: matchScoreView.bottomAnchor, constant: 8),
             frameHistoryTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             frameHistoryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            frameHistoryTableView.bottomAnchor.constraint(equalTo: turnIndicatorSectionView.topAnchor, constant: -8),
 
-            turnIndicatorSectionView.heightAnchor.constraint(equalToConstant: 100),
-            turnIndicatorSectionView.topAnchor.constraint(equalTo: frameHistoryTableView.bottomAnchor, constant: 8),
+            turnIndicatorSectionView.bottomAnchor.constraint(equalTo: bagTossOutcomeSectionView.topAnchor, constant: -8),
             turnIndicatorSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             turnIndicatorSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
 
-//            bagTossOutcomeSectionView.heightAnchor.constraint(equalToConstant: 200),
             bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             bagTossOutcomeSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             bagTossOutcomeSectionView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -16),
@@ -59,15 +58,18 @@ class CurrentMatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        presenter.sendNewFrameData()
         configureFrameHistoryTableView()
-        bagTossOutcomeSectionView.delegate = presenter
         matchScoreSection.backgroundColor = .systemGray5
         matchScoreSection.layer.cornerRadius = 10
+
+        bagTossOutcomeSectionView.delegate = presenter
 
         bagTossOutcomeSectionView.backgroundColor = .systemGray5
         bagTossOutcomeSectionView.layer.cornerRadius = 10
         view.backgroundColor = .white
 
+        
         configureRoundCompleteButton()
     }
 
@@ -75,7 +77,7 @@ class CurrentMatchViewController: UIViewController {
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.delegate = self
 
-        frameHistoryTableView.tableHeaderView = FrameHistoryTableHeaderView()
+//        frameHistoryTableView.tableHeaderView = FrameHistoryTableHeaderView()
         frameHistoryTableView.separatorStyle = .none
 
         frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
@@ -88,36 +90,48 @@ class CurrentMatchViewController: UIViewController {
     }
 
     @objc func didTapCompleteRoundButton() {
-        
+        presenter.startNextFrame()
     }
 
 }
 
+// MARK: - UITableView Delegate
 extension CurrentMatchViewController: UITableViewDelegate {
 
 }
 
 extension CurrentMatchViewController: CurrentMatchViewType {
-    func updateScoreLabel(tag: Int) {
-        switch tag {
-        case IncrementScoreButton.blueUndoOnButton.rawValue:
-            matchScoreSection.blueFrameScoreLabel.text = "-1"
-        case IncrementScoreButton.blueOnButton.rawValue:
-            matchScoreSection.blueFrameScoreLabel.text = "1"
-        case IncrementScoreButton.blueUndoInButton.rawValue:
-            matchScoreSection.blueFrameScoreLabel.text = "-3"
-        case IncrementScoreButton.blueInButton.rawValue:
-            matchScoreSection.blueFrameScoreLabel.text = "3"
-        case IncrementScoreButton.redUndoOnButton.rawValue:
-            matchScoreSection.redFrameScoreLabel.text = "-1"
-        case IncrementScoreButton.redOnButton.rawValue:
-            matchScoreSection.redFrameScoreLabel.text = "1"
-        case IncrementScoreButton.redUndoInButton.rawValue:
-            matchScoreSection.redFrameScoreLabel.text = "-3"
-        case IncrementScoreButton.redInButton.rawValue:
-            matchScoreSection.redFrameScoreLabel.text = "3"
-        default:
-            break
+
+    func reloadFrameHistoryData() {
+        frameHistoryTableView.reloadData()
+    }
+
+    func updateScore(for stepper: ScoreStepperTag, with value: Int, frameScore: Int) {
+        switch stepper {
+        case .onBlue:
+            bagTossOutcomeSectionView.blueOnLabel.text = "On: \(value)"
+            matchScoreSection.blueFrameScoreLabel.text = "\(frameScore)"
+        case .inBlue:
+            bagTossOutcomeSectionView.blueInLabel.text = "In: \(value)"
+            matchScoreSection.blueFrameScoreLabel.text = "\(frameScore)"
+        case .onRed:
+            bagTossOutcomeSectionView.redOnLabel.text = "On: \(value)"
+            matchScoreSection.redFrameScoreLabel.text = "\(frameScore)"
+        case .inRed:
+            bagTossOutcomeSectionView.redInLabel.text = "In: \(value)"
+            matchScoreSection.redFrameScoreLabel.text = "\(frameScore)"
         }
     }
+
+    func updatePitcherNameLabel(bluePitcher: String, redPitcher: String) {
+        self.turnIndicatorSectionView.bluePitcherNameLabel.text = bluePitcher
+        self.turnIndicatorSectionView.redPitcherNameLabel.text = redPitcher
+    }
+
+    func populateViewsForNextFrame(bluePlayerName: String, redPlayerName: String, blueTeamMatchScore: Int, redTeamMatchScore: Int) {
+        turnIndicatorSectionView.configurePlayerLabelsForNextFrame(blueName: bluePlayerName, redName: redPlayerName)
+        matchScoreSection.configureScoreLabelsForNextFrame(blueTeamMatchScore: blueTeamMatchScore, redTeamMatchScore: redTeamMatchScore)
+        bagTossOutcomeSectionView.resetScoreSteppers()
+    }
+
 }

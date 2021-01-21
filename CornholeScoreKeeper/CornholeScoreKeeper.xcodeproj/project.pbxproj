@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20AA48425B63D10001B689D /* Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20AA48325B63D10001B689D /* Outcome.swift */; };
 		D240125B257F00DD008FDF07 /* CurrentMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */; };
 		D2488978259284A100BCBEDA /* FrameTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2488977259284A100BCBEDA /* FrameTableCell.swift */; };
 		D2587108259A7032006B6E1E /* FrameHistoryTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */; };
@@ -19,6 +20,7 @@
 		D2856997257AF2B500F43121 /* CurrentMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */; };
 		D285699C257AFE3500F43121 /* MatchResultsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285699B257AFE3500F43121 /* MatchResultsTableCell.swift */; };
 		D289C74A25819CEA00A7F5A5 /* TurnIndicationSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289C74925819CEA00A7F5A5 /* TurnIndicationSectionView.swift */; };
+		D29F648525B7908800F907F0 /* ScoreStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F648425B7908800F907F0 /* ScoreStepper.swift */; };
 		D2B34D442576E8BF008DDB3F /* NewMatchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */; };
 		D2B34D472576EA62008DDB3F /* NewMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */; };
 		D2B34D512576F69F008DDB3F /* CurrentMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */; };
@@ -50,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20AA48325B63D10001B689D /* Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outcome.swift; sourceTree = "<group>"; };
 		D240125A257F00DD008FDF07 /* CurrentMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchModel.swift; sourceTree = "<group>"; };
 		D2488977259284A100BCBEDA /* FrameTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTableCell.swift; sourceTree = "<group>"; };
 		D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHistoryTableHeaderView.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		D2856996257AF2B500F43121 /* CurrentMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchPresenter.swift; sourceTree = "<group>"; };
 		D285699B257AFE3500F43121 /* MatchResultsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResultsTableCell.swift; sourceTree = "<group>"; };
 		D289C74925819CEA00A7F5A5 /* TurnIndicationSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnIndicationSectionView.swift; sourceTree = "<group>"; };
+		D29F648425B7908800F907F0 /* ScoreStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStepper.swift; sourceTree = "<group>"; };
 		D2B34D432576E8BF008DDB3F /* NewMatchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchRouter.swift; sourceTree = "<group>"; };
 		D2B34D462576EA62008DDB3F /* NewMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchPresenter.swift; sourceTree = "<group>"; };
 		D2B34D502576F69F008DDB3F /* CurrentMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 				D289C74925819CEA00A7F5A5 /* TurnIndicationSectionView.swift */,
 				D2587107259A7032006B6E1E /* FrameHistoryTableHeaderView.swift */,
 				D2E59547259BF1A6000CACF0 /* BagButton.swift */,
+				D20AA48325B63D10001B689D /* Outcome.swift */,
+				D29F648425B7908800F907F0 /* ScoreStepper.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -361,6 +367,8 @@
 				D2B36001256DC05400C1C05B /* Match.swift in Sources */,
 				D2B34D592576F8A3008DDB3F /* LineView.swift in Sources */,
 				D2B35FF3256DBBEB00C1C05B /* MatchHistoryModel.swift in Sources */,
+				D20AA48425B63D10001B689D /* Outcome.swift in Sources */,
+				D29F648525B7908800F907F0 /* ScoreStepper.swift in Sources */,
 				D2656EE5256E07E400DCFCBC /* CornholeBoardView.swift in Sources */,
 				D2E59548259BF1A6000CACF0 /* BagButton.swift in Sources */,
 				D267B93B256DDED900130192 /* PlayerStatsViewController.swift in Sources */,

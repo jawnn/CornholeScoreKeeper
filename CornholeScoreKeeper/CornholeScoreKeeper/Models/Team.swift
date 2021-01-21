@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 enum TeamColor: Int {
     case blue
@@ -13,6 +13,17 @@ enum TeamColor: Int {
             return "Red"
         default:
             return "None"
+        }
+    }
+
+    var color: UIColor {
+        switch self {
+        case .blue:
+            return UIColor.systemBlue
+        case .red:
+            return UIColor.systemRed
+        default:
+            return UIColor.systemGray5
         }
     }
 }

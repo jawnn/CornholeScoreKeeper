@@ -1,27 +1,35 @@
 import Foundation
 
 class Frame {
-    var frameNumber: Int = 1
+    var frameNumber: Int
     var bluePitcher: Pitcher
     var redPitcher: Pitcher
 
     var scoringTeam: TeamColor = .none
 
-    init(bluePitcher: Pitcher, redPitcher: Pitcher) {
+    init(frame: Int, bluePitcher: Pitcher, redPitcher: Pitcher) {
+        self.frameNumber = frame
         self.bluePitcher = bluePitcher
         self.redPitcher = redPitcher
-
-        self.bluePitcher.generateFrameScore()
-        self.redPitcher.generateFrameScore()
-        self.scoringTeam = generateFrameScore()
     }
 
-    private func generateFrameScore() -> TeamColor {
+    func generatePlusMinus() -> Int {
+        guard scoringTeam != .none else {
+            return 0
+        }
+        return max(bluePitcher.pointsGainedThisFrame, redPitcher.pointsGainedThisFrame)
+    }
+
+    func generateFrameScore() -> Int {
         let blueScore = bluePitcher.frameScore
         let redScore = redPitcher.frameScore
         guard blueScore != redScore else {
-            return .none
+            return 0
         }
-        return blueScore > redScore ? .blue : .red
+        self.scoringTeam = blueScore > redScore ? .blue : .red
+        bluePitcher.generateFrameStats(opponentScore: redScore)
+        redPitcher.generateFrameStats(opponentScore: blueScore)
+        return max(bluePitcher.pointsGainedThisFrame, redPitcher.pointsGainedThisFrame)
     }
+
 }

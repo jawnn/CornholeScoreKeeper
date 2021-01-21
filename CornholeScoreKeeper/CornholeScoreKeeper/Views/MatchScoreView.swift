@@ -83,6 +83,14 @@ class MatchScoreView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configureScoreLabelsForNextFrame(blueTeamMatchScore: Int, redTeamMatchScore: Int) {
+        redFrameScoreLabel.text = "0"
+        redMatchScoreLabel.text = "\(redTeamMatchScore)"
+
+        blueFrameScoreLabel.text = "0"
+        blueMatchScoreLabel.text = "\(blueTeamMatchScore)"
+    }
+
     private func configureViewConstraints() {
         addSubviews(
             matchScoreLabel,

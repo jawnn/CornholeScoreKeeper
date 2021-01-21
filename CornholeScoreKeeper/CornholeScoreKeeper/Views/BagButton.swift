@@ -2,17 +2,16 @@ import UIKit
 
 class BagButton: UIButton {
 
-    var bag: BagOutcomeButton
+    var teamColor: UIColor
 
-    init(frame: CGRect, bag: BagOutcomeButton) {
-        self.bag = bag
+    init(frame: CGRect, color: UIColor) {
+        self.teamColor = color
         super.init(frame: .zero)
 
-        tag = bag.rawValue
         layer.borderWidth = 2
         layer.cornerRadius = 24
-        layer.borderColor = bag.buttonColor.cgColor
-        backgroundColor = bag.populateAtStart ? bag.buttonColor : .white
+        layer.borderColor = color.cgColor
+        backgroundColor = .white
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: 48).isActive = true
         widthAnchor.constraint(equalToConstant: 48).isActive = true

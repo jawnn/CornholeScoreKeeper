@@ -1,165 +1,159 @@
 import UIKit
 
-protocol IncrementScoreDelegate: class {
-    func didTapBagOutcomeButton(tag: Int)
+enum ScoreStepperTag: Int {
+    case onBlue
+    case inBlue
+    case onRed
+    case inRed
 }
 
-enum BagOutcomeButton: Int, CaseIterable {
-    case blueRowOneOff, blueRowOneOn, blueRowOneIn
-    case blueRowTwoOff, blueRowTwoOn, blueRowTwoIn
-    case blueRowThreeOff, blueRowThreeOn, blueRowThreeIn
-    case blueRowFourOff, blueRowFourOn, blueRowFourIn
-
-    case redRowOneOn, redRowOneIn, redRowOneOff
-    case redRowTwoOn, redRowTwoIn, redRowTwoOff
-    case redRowThreeOn, redRowThreeIn, redRowThreeOff
-    case redRowFourOn, redRowFourIn, redRowFourOff
-
-    var populateAtStart: Bool {
-        switch self {
-        case .blueRowOneOff, .blueRowTwoOff, .blueRowThreeOff, .blueRowFourOff,
-             .redRowOneOff, .redRowTwoOff, .redRowThreeOff, .redRowFourOff:
-            return true
-        default:
-            return false
-        }
-    }
-
-    var buttonColor: UIColor {
-        switch self {
-        case .blueRowOneOff, .blueRowOneOn, .blueRowOneIn, .blueRowTwoOff, .blueRowTwoOn, .blueRowTwoIn, .blueRowThreeOff, .blueRowThreeOn, .blueRowThreeIn, .blueRowFourOff, .blueRowFourOn, .blueRowFourIn:
-            return UIColor.blue
-        case .redRowOneOff, .redRowOneOn, .redRowOneIn, .redRowTwoOff, .redRowTwoOn, .redRowTwoIn, .redRowThreeOff, .redRowThreeOn, .redRowThreeIn, .redRowFourOff, .redRowFourOn, .redRowFourIn:
-            return UIColor.red
-        }
-    }
-}
-
-enum IncrementScoreButton: Int {
-    case blueOnButton, blueUndoOnButton, redOnButton, redUndoOnButton,
-         blueUndoInButton, blueInButton, redInButton, redUndoInButton
+protocol ScoreOutcomeDelegate: class {
+    func updateScoreModel(for stepperTag: ScoreStepperTag, with newValue: Int)
 }
 
 class BagTossOutcomeSectionView: UIView {
 
-    weak var delegate: IncrementScoreDelegate?
-
-    let blueButtonsStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 4
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    let blueOnLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "On: 0"
+        label.font = .systemFont(ofSize: 24, weight: .medium)
+        label.textColor = .systemBlue
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
-    let redButtonsStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 4
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    let blueOnStepper = ScoreStepper(frame: .zero, tag: ScoreStepperTag.onBlue.rawValue)
+
+    let blueInLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "In: 0"
+        label.font = .systemFont(ofSize: 24, weight: .medium)
+        label.textColor = .systemBlue
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
-    let lineView = LineView(frame: .zero)
+    let blueInStepper = ScoreStepper(frame: .zero, tag: ScoreStepperTag.inBlue.rawValue)
+
+    let redOnLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "On: 0"
+        label.font = .systemFont(ofSize: 24, weight: .medium)
+        label.textColor = .systemRed
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let redOnStepper = ScoreStepper(frame: .zero, tag: ScoreStepperTag.onRed.rawValue)
+
+    let redInLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "In: 0"
+        label.font = .systemFont(ofSize: 24, weight: .medium)
+        label.textColor = .systemRed
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let redInStepper = ScoreStepper(frame: .zero, tag: ScoreStepperTag.inRed.rawValue)
+
+    weak var delegate: ScoreOutcomeDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(blueButtonsStackView, lineView, redButtonsStackView)
-        layoutHeaderLabelsForStackViews(stackView: blueButtonsStackView, shouldReverse: false)
-        layoutHeaderLabelsForStackViews(stackView: redButtonsStackView, shouldReverse: true)
-        configureViewConstraints()
+
+        translatesAutoresizingMaskIntoConstraints = false
+
+        addSubviews(
+            blueOnLabel, blueOnStepper, blueInLabel, blueInStepper,
+            redOnLabel, redOnStepper, redInLabel, redInStepper
+        )
+
+        configureViews()
+        configureConstraints()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureViewConstraints() {
-        NSLayoutConstraint.activate([
-            blueButtonsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            blueButtonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
-            blueButtonsStackView.trailingAnchor.constraint(equalTo: lineView.leadingAnchor, constant: -8),
-            blueButtonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
-
-            lineView.widthAnchor.constraint(equalToConstant: 1),
-            lineView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            lineView.topAnchor.constraint(equalTo: topAnchor),
-            lineView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            redButtonsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            redButtonsStackView.leadingAnchor.constraint(equalTo: lineView.trailingAnchor, constant: 8),
-            redButtonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
-            redButtonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
-        ])
-        configureButtonStackViews()
-    }
-
-    private func layoutHeaderLabelsForStackViews(stackView: UIStackView, shouldReverse: Bool) {
-        let titles: [String] = shouldReverse ? ["On", "In", "Off"] : [ "Off", "In", "On"]
-        let headerStackView = UIStackView(frame: .zero)
-        headerStackView.spacing = 5
-        headerStackView.axis = .horizontal
-        headerStackView.distribution = .fillEqually
-        for title in titles {
-            let label = UILabel(frame: .zero)
-            label.text = title
-            label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
-            label.textAlignment = .center
-            headerStackView.addArrangedSubview(label)
-        }
-        stackView.addArrangedSubview(headerStackView)
-    }
-
-    private func configureButtonStackViews() {
-        let buttonTags = BagOutcomeButton.allCases
-        var tagIndex = 0
-        for _ in 1...4 {
-            let rowStackView = UIStackView(frame: .zero)
-            rowStackView.spacing = 2
-            rowStackView.axis = .horizontal
-            rowStackView.distribution = .equalSpacing
-            for _ in 1...3 {
-                let bag = buttonTags[tagIndex]
-                let button = BagButton(frame: .zero, bag: bag)
-                button.addTarget(self, action: #selector(didTapBagOutcomeButton(sender:)), for: .touchUpInside)
-                rowStackView.addArrangedSubview(button)
-                tagIndex += 1
-            }
-            blueButtonsStackView.addArrangedSubview(rowStackView)
-        }
-
-        for _ in 1...4 {
-            let rowStackView = UIStackView(frame: .zero)
-            rowStackView.spacing = 2
-            rowStackView.axis = .horizontal
-            rowStackView.distribution = .equalSpacing
-            for _ in 1...3 {
-                let bag = buttonTags[tagIndex]
-                let button = BagButton(frame: .zero, bag: bag)
-                button.addTarget(self, action: #selector(didTapBagOutcomeButton(sender:)), for: .touchUpInside)
-                rowStackView.addArrangedSubview(button)
-                tagIndex += 1
-            }
-            redButtonsStackView.addArrangedSubview(rowStackView)
+    private func configureViews() {
+        for stepper in [blueOnStepper, blueInStepper, redOnStepper, redInStepper] {
+            stepper.addTarget(self, action: #selector(didTapScoreStepper(sender:)), for: .valueChanged)
         }
     }
 
-    @objc func didTapBagOutcomeButton(sender: UIButton) {
+    func resetScoreSteppers() {
+        blueOnLabel.text = "ON: 0"
+        blueInLabel.text = "IN: 0"
+        redOnLabel.text = "ON: 0"
+        redInLabel.text = "IN: 0"
+        for stepper in [blueOnStepper, blueInStepper, redOnStepper, redInStepper] {
+            stepper.value = 0
+            stepper.minimumValue = 0
+            stepper.maximumValue = 4
+        }
+    }
 
+    @objc func didTapScoreStepper(sender: UIStepper) {
+        let newValue = Int(sender.value)
         switch sender.tag {
-        case 0...11:
-            sender.backgroundColor = sender.backgroundColor == .white ? .blue : .white
-            print("Blue")
-        case 12...23:
-            sender.backgroundColor = sender.backgroundColor == .white ? .red : .white
-            print("Red")
+        case ScoreStepperTag.onBlue.rawValue:
+            manageScoreStepperState(blueOnStepper, blueInStepper)
+            delegate?.updateScoreModel(for: .onBlue, with: newValue)
+        case ScoreStepperTag.inBlue.rawValue:
+            manageScoreStepperState(blueOnStepper, blueInStepper)
+            delegate?.updateScoreModel(for: .inBlue, with: newValue)
+        case ScoreStepperTag.onRed.rawValue:
+            manageScoreStepperState(redOnStepper, redInStepper)
+            delegate?.updateScoreModel(for: .onRed, with: newValue)
+        case ScoreStepperTag.inRed.rawValue:
+            manageScoreStepperState(redOnStepper, redInStepper)
+            delegate?.updateScoreModel(for: .inRed, with: newValue)
         default:
-            print("Invalid")
+            break
         }
-        delegate?.didTapBagOutcomeButton(tag: sender.tag)
+    }
+
+    func resetView() {
+
+    }
+
+    private func manageScoreStepperState(_ onStepper: UIStepper, _ inStepper: UIStepper) {
+        let maxNumberOfTossesPerRound = 4.0
+        onStepper.maximumValue = maxNumberOfTossesPerRound - inStepper.value
+        inStepper.maximumValue = maxNumberOfTossesPerRound - onStepper.value
+    }
+
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            blueOnLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            blueOnLabel.centerXAnchor.constraint(equalTo: blueOnStepper.centerXAnchor),
+
+            blueOnStepper.topAnchor.constraint(equalTo: blueOnLabel.bottomAnchor, constant: 8),
+            blueOnStepper.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -24),
+
+            blueInLabel.topAnchor.constraint(equalTo: blueOnStepper.bottomAnchor, constant: 16),
+            blueInLabel.centerXAnchor.constraint(equalTo: blueInStepper.centerXAnchor),
+            
+            blueInStepper.topAnchor.constraint(equalTo: blueInLabel.bottomAnchor, constant: 8),
+            blueInStepper.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -24),
+            blueInStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+
+            redOnLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            redOnLabel.centerXAnchor.constraint(equalTo: redOnStepper.centerXAnchor),
+
+            redOnStepper.topAnchor.constraint(equalTo: redOnLabel.bottomAnchor, constant: 8),
+            redOnStepper.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 24),
+
+            redInLabel.topAnchor.constraint(equalTo: redOnStepper.bottomAnchor, constant: 16),
+            redInLabel.centerXAnchor.constraint(equalTo: redInStepper.centerXAnchor),
+
+            redInStepper.topAnchor.constraint(equalTo: redInLabel.bottomAnchor, constant: 8),
+            redInStepper.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 24),
+            redInStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
+        ])
+
     }
 
 }
