@@ -27,17 +27,7 @@ class CurrentMatchModel: CurrentMatchModelType {
     }
 
     init(match: Match) {
-        let red = Team(color: .red)
-        red.players = [
-            Pitcher(player: Player(name: "Red1")),
-            Pitcher(player: Player(name: "Red2"))
-        ]
-        let blue = Team(color: .blue)
-        blue.players = [
-            Pitcher(player: Player(name: "Blue1")),
-            Pitcher(player: Player(name: "Blue2"))
-        ]
-        self.currentMatch = Match(redTeam: red, blueTeam: blue, matchType: .doubles)
+        self.currentMatch = Match(redTeam: match.redTeam, blueTeam: match.blueTeam, matchType: match.matchType)
         self.blueTeam = self.currentMatch.blueTeam
         self.redTeam = self.currentMatch.redTeam
         self.currentFrameNumber = self.currentMatch.currentFrameNumber

@@ -2,72 +2,84 @@ import UIKit
 
 class MatchScoreView: UIView {
 
-    let matchScoreLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.backgroundColor = .systemGray3
-        label.text = "Match Score"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 40, weight: .bold)
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let blueTeamIcon: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .systemBlue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     let blueMatchScoreLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
-        label.backgroundColor = .systemGray3
-        label.text = "0"
+        label.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         label.textColor = .systemBlue
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    let matchScoreLineDivider = LineView()
+    let matchScoreLineDivider: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "match score"
+        label.font = .systemFont(ofSize: 24, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     let redMatchScoreLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
-        label.backgroundColor = .systemGray3
-        label.text = "0"
+        label.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         label.textColor = .systemRed
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    let frameScoreLabel: UILabel = {
+    let redTeamIcon: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .systemRed
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let bluePitcherNameLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.backgroundColor = .systemGray3
-        label.text = "Frame Score"
-        label.textAlignment = .center
+        label.text = "blue"
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let blueFrameScoreLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.backgroundColor = .systemGray3
-        label.text = "0"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         label.textColor = .systemBlue
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    let frameScoreLineDivider = LineView()
+    let frameScoreLineDivider: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "frame score"
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     let redFrameScoreLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.backgroundColor = .systemGray3
-        label.text = "0"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         label.textColor = .systemRed
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let redPitcherNameLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "reeed"
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -76,6 +88,12 @@ class MatchScoreView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubviews(
+            blueTeamIcon, blueMatchScoreLabel, matchScoreLineDivider, redMatchScoreLabel, redTeamIcon,
+            bluePitcherNameLabel, blueFrameScoreLabel, frameScoreLineDivider, redFrameScoreLabel, redPitcherNameLabel
+            )
+
         configureViewConstraints()
     }
 
@@ -83,55 +101,56 @@ class MatchScoreView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureScoreLabelsForNextFrame(blueTeamMatchScore: Int, redTeamMatchScore: Int) {
+    func configureScoreLabelsForNextFrame(bluePlayerName: String, redPlayerName: String, blueTeamMatchScore: Int, redTeamMatchScore: Int) {
         redFrameScoreLabel.text = "0"
+        redPitcherNameLabel.text = redPlayerName
         redMatchScoreLabel.text = "\(redTeamMatchScore)"
 
         blueFrameScoreLabel.text = "0"
+        bluePitcherNameLabel.text = bluePlayerName
         blueMatchScoreLabel.text = "\(blueTeamMatchScore)"
     }
 
     private func configureViewConstraints() {
-        addSubviews(
-            matchScoreLabel,
-            blueMatchScoreLabel, matchScoreLineDivider, redMatchScoreLabel,
-            frameScoreLabel,
-            blueFrameScoreLabel, frameScoreLineDivider, redFrameScoreLabel
-        )
 
         NSLayoutConstraint.activate([
-            matchScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            matchScoreLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 6),
+            blueTeamIcon.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            blueTeamIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            blueTeamIcon.bottomAnchor.constraint(equalTo: bluePitcherNameLabel.topAnchor, constant: -16),
+            blueTeamIcon.heightAnchor.constraint(equalToConstant: 32),
+            blueTeamIcon.widthAnchor.constraint(equalToConstant: 32),
 
-            blueMatchScoreLabel.topAnchor.constraint(equalTo: matchScoreLabel.bottomAnchor, constant: 4),
-            blueMatchScoreLabel.trailingAnchor.constraint(equalTo: matchScoreLabel.leadingAnchor, constant: -8),
+            blueMatchScoreLabel.leadingAnchor.constraint(equalTo: blueTeamIcon.trailingAnchor, constant: 16),
+            blueMatchScoreLabel.centerYAnchor.constraint(equalTo: blueTeamIcon.centerYAnchor),
 
-            matchScoreLineDivider.heightAnchor.constraint(equalToConstant: 4),
             matchScoreLineDivider.centerXAnchor.constraint(equalTo: centerXAnchor),
-            matchScoreLineDivider.centerYAnchor.constraint(equalTo: blueMatchScoreLabel.centerYAnchor),
-            matchScoreLineDivider.leadingAnchor.constraint(equalTo: blueMatchScoreLabel.trailingAnchor, constant: 8),
-            matchScoreLineDivider.trailingAnchor.constraint(equalTo: redMatchScoreLabel.leadingAnchor, constant: -8),
+            matchScoreLineDivider.centerYAnchor.constraint(equalTo: blueTeamIcon.centerYAnchor),
 
-            redMatchScoreLabel.topAnchor.constraint(equalTo: matchScoreLabel.bottomAnchor, constant: 4),
-            redMatchScoreLabel.leadingAnchor.constraint(equalTo: matchScoreLabel.trailingAnchor, constant: 8),
+            redMatchScoreLabel.trailingAnchor.constraint(equalTo: redTeamIcon.leadingAnchor, constant: -16),
+            redMatchScoreLabel.centerYAnchor.constraint(equalTo: redTeamIcon.centerYAnchor),
 
-            frameScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            frameScoreLabel.topAnchor.constraint(equalTo: redMatchScoreLabel.bottomAnchor, constant: 6),
+            redTeamIcon.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            redTeamIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            redTeamIcon.bottomAnchor.constraint(equalTo: redPitcherNameLabel.topAnchor, constant: -16),
+            redTeamIcon.heightAnchor.constraint(equalToConstant: 32),
+            redTeamIcon.widthAnchor.constraint(equalToConstant: 32),
 
-            blueFrameScoreLabel.topAnchor.constraint(equalTo: frameScoreLabel.bottomAnchor, constant: 4),
-            blueFrameScoreLabel.trailingAnchor.constraint(equalTo: frameScoreLabel.leadingAnchor, constant: -8),
-            blueFrameScoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
+            bluePitcherNameLabel.leadingAnchor.constraint(equalTo: blueTeamIcon.trailingAnchor, constant: 4),
+            bluePitcherNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
 
-            frameScoreLineDivider.heightAnchor.constraint(equalToConstant: 2),
+            blueFrameScoreLabel.leadingAnchor.constraint(equalTo: bluePitcherNameLabel.trailingAnchor, constant: 16),
+            blueFrameScoreLabel.centerYAnchor.constraint(equalTo: bluePitcherNameLabel.centerYAnchor),
+
             frameScoreLineDivider.centerXAnchor.constraint(equalTo: centerXAnchor),
-            frameScoreLineDivider.centerYAnchor.constraint(equalTo: blueFrameScoreLabel.centerYAnchor),
-            frameScoreLineDivider.leadingAnchor.constraint(equalTo: blueFrameScoreLabel.trailingAnchor, constant: 8),
-            frameScoreLineDivider.trailingAnchor.constraint(equalTo: redFrameScoreLabel.leadingAnchor, constant: -8),
+            frameScoreLineDivider.centerYAnchor.constraint(equalTo: redPitcherNameLabel.centerYAnchor),
 
-            redFrameScoreLabel.topAnchor.constraint(equalTo: frameScoreLabel.bottomAnchor, constant: 4),
-            redFrameScoreLabel.leadingAnchor.constraint(equalTo: frameScoreLabel.trailingAnchor, constant: 8),
-            redFrameScoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
+            redFrameScoreLabel.trailingAnchor.constraint(equalTo: redPitcherNameLabel.leadingAnchor, constant: -16),
+            redFrameScoreLabel.centerYAnchor.constraint(equalTo: redPitcherNameLabel.centerYAnchor),
+
+            redPitcherNameLabel.trailingAnchor.constraint(equalTo: redTeamIcon.leadingAnchor, constant: -4),
+            redPitcherNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
+
     }
 
 }

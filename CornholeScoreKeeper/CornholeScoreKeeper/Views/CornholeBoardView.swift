@@ -34,7 +34,6 @@ class CornholeBoardView: UIView {
             direction ? holeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8) : holeView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             holeView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-//        holeView.layer.cornerRadius = holeView.frame.height / 2
     }
 
 }

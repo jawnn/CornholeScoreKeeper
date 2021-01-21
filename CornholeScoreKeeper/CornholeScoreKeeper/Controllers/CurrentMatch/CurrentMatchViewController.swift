@@ -4,7 +4,6 @@ class CurrentMatchViewController: UIViewController {
 
     private weak var matchScoreSection: MatchScoreView!
     private weak var frameHistoryTableView: UITableView!
-    private weak var turnIndicatorSectionView: TurnIndicationSectionView!
     private weak var bagTossOutcomeSectionView: BagTossOutcomeSectionView!
     private weak var completeRoundButton: UIButton!
 
@@ -15,28 +14,22 @@ class CurrentMatchViewController: UIViewController {
 
         let matchScoreView = MatchScoreView(frame: .zero)
         let frameHistoryTableView = UITableView(frame: .zero)
-        let turnIndicatorSectionView = TurnIndicationSectionView(frame: .zero)
         let bagTossOutcomeSectionView = BagTossOutcomeSectionView(frame: .zero)
         let completeRoundButton = UIButton(frame: .zero)
 
         frameHistoryTableView.translatesAutoresizingMaskIntoConstraints = false
         completeRoundButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubviews(matchScoreView, frameHistoryTableView, turnIndicatorSectionView, bagTossOutcomeSectionView, completeRoundButton)
+        view.addSubviews(matchScoreView, frameHistoryTableView, bagTossOutcomeSectionView, completeRoundButton)
 
         NSLayoutConstraint.activate([
             matchScoreView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             matchScoreView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             matchScoreView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
 
-            frameHistoryTableView.heightAnchor.constraint(equalToConstant: 100),
             frameHistoryTableView.topAnchor.constraint(equalTo: matchScoreView.bottomAnchor, constant: 8),
             frameHistoryTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             frameHistoryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            frameHistoryTableView.bottomAnchor.constraint(equalTo: turnIndicatorSectionView.topAnchor, constant: -8),
-
-            turnIndicatorSectionView.bottomAnchor.constraint(equalTo: bagTossOutcomeSectionView.topAnchor, constant: -8),
-            turnIndicatorSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            turnIndicatorSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            frameHistoryTableView.bottomAnchor.constraint(equalTo: bagTossOutcomeSectionView.topAnchor, constant: -8),
 
             bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             bagTossOutcomeSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
@@ -50,7 +43,6 @@ class CurrentMatchViewController: UIViewController {
 
         self.matchScoreSection = matchScoreView
         self.frameHistoryTableView = frameHistoryTableView
-        self.turnIndicatorSectionView = turnIndicatorSectionView
         self.bagTossOutcomeSectionView = bagTossOutcomeSectionView
         self.completeRoundButton = completeRoundButton
     }
@@ -76,6 +68,8 @@ class CurrentMatchViewController: UIViewController {
     private func configureFrameHistoryTableView() {
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.delegate = self
+
+        frameHistoryTableView.tableFooterView = UIView()
 
         frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
@@ -120,14 +114,13 @@ extension CurrentMatchViewController: CurrentMatchViewType {
         }
     }
 
-    func updatePitcherNameLabel(bluePitcher: String, redPitcher: String) {
-        self.turnIndicatorSectionView.bluePitcherNameLabel.text = bluePitcher
-        self.turnIndicatorSectionView.redPitcherNameLabel.text = redPitcher
-    }
-
-    func populateViewsForNextFrame(bluePlayerName: String, redPlayerName: String, blueTeamMatchScore: Int, redTeamMatchScore: Int) {
-        turnIndicatorSectionView.configurePlayerLabelsForNextFrame(blueName: bluePlayerName, redName: redPlayerName)
-        matchScoreSection.configureScoreLabelsForNextFrame(blueTeamMatchScore: blueTeamMatchScore, redTeamMatchScore: redTeamMatchScore)
+    func populateViewsForNextFrame(bluePitcher bluePlayerName: String, redPitcher redPlayerName: String, blueTeam blueTeamMatchScore: Int, redTeam redTeamMatchScore: Int) {
+        matchScoreSection.configureScoreLabelsForNextFrame(
+            bluePlayerName: bluePlayerName,
+            redPlayerName: redPlayerName,
+            blueTeamMatchScore: blueTeamMatchScore,
+            redTeamMatchScore: redTeamMatchScore
+        )
         bagTossOutcomeSectionView.resetScoreSteppers()
     }
 
