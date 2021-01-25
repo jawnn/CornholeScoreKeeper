@@ -81,7 +81,7 @@ class CurrentMatchViewController: UIViewController {
     }
 
     @objc func didTapCompleteRoundButton() {
-        presenter.startNextFrame()
+        presenter.didTeamReachScoreLimit()
     }
 
 }
@@ -122,6 +122,11 @@ extension CurrentMatchViewController: CurrentMatchViewType {
             redTeamMatchScore: redTeamMatchScore
         )
         bagTossOutcomeSectionView.resetScoreSteppers()
+    }
+
+    func showMatchDetails() {
+        let vc = MatchDetailsViewController()
+        present(vc, animated: true)
     }
 
 }

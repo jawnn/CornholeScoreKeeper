@@ -18,7 +18,9 @@ class NewMatchRouter: NewMatchRouterType {
         let viewController = CurrentMatchViewController()
         let model = CurrentMatchModel(match: Match(redTeam: redTeam, blueTeam: blueTeam, matchType: matchType))
         let presenter = CurrentMatchPresenter(model: model, view: viewController)
+        viewController.modalPresentationStyle = .fullScreen
         viewController.presenter = presenter
-        navigationController.pushViewController(viewController, animated: true)
+        self.view.present(viewController, animated: true)
+//        navigationController.pushViewController(viewController, animated: true)
     }
 }

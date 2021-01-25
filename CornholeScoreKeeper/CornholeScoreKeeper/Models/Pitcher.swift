@@ -1,34 +1,36 @@
 import Foundation
 
-struct Pitcher {
+class Pitcher {
     var player: Player
-    var inThisFrame: Int = 0
-    var onThisFrame: Int = 0
-    var pointsGainedThisFrame: Int = 0
-    var pointsAgainstThisFrame: Int = 0
+    var frames: [FrameStat] = []
 
-    var offThisFrame: Int {
-        get {
-            return 4 - (inThisFrame + onThisFrame)
-        }
+    var totalScore: Int = 0
+    var totalOnBoard: Int = 0
+    var totalOffBoard: Int = 0
+    var totalCornholes: Int = 0
+    var matchPlusMinus: Int = 0
+
+    var averageScore: Int {
+        return self.totalScore / self.frames.count
     }
 
-    var frameScore: Int {
-        get {
-            return (self.inThisFrame * 3) + (self.onThisFrame)
-        }
+    var efficientcyRating: Double {
+        let totalTosses = Double(frames.count * 4)
+        let perfectScore = Double(totalTosses * 3)
+        return Double(totalScore) / perfectScore
     }
 
     init(player: Player) {
         self.player = player
     }
 
-    mutating func generateFrameStats(opponentScore: Int) {
-        if self.frameScore > opponentScore {
-            pointsGainedThisFrame = self.frameScore - opponentScore
-        } else {
-            pointsAgainstThisFrame = opponentScore - self.frameScore
-        }
+    func incrementStats(with frame: FrameStat) {
+        totalScore += frame.score
+        totalOnBoard += frame.onBoard
+        totalOffBoard += frame.offBoard
+        totalCornholes += frame.cornholes
+        matchPlusMinus += frame.plusMinus
+        frames.append(frame)
     }
 
 }

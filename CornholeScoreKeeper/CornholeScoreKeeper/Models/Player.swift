@@ -5,7 +5,9 @@ class Player {
 
     var matches: Archive = Archive()
     var careerRecord: Record = Record()
+    var singlesMatches: [Match] = []
     var singlesRecord: Record = Record()
+    var doublesMatches: [Match] = []
     var doublesRecord: Record  = Record()
 
     var totalFrames: Int = 0
