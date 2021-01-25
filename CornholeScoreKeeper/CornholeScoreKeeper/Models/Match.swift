@@ -25,13 +25,11 @@ enum MatchType: Int {
 class Match {
     var date: Date = Date()
     var frames: [Frame] = []
-    var didWin: TeamColor = .none
     var redTeam: Team
     var blueTeam: Team
     var matchType: MatchType
-
+    var winningTeam: TeamColor = .none
     var currentFrameNumber: Int = 1
-
     var currentPitcherIndex: Int {
         get {
             if self.matchType == .single {
@@ -59,5 +57,10 @@ class Match {
         case .none:
             break
         }
+    }
+
+    func setWinningTeam() {
+        let winningTeam: TeamColor = blueTeam.score >= 21 ? .blue : .red
+        self.winningTeam = winningTeam
     }
 }

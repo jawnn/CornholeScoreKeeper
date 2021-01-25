@@ -2,11 +2,13 @@ import UIKit
 
 protocol CurrentMatchPresenterType: UITableViewDataSource, ScoreOutcomeDelegate {
 
-    func sendNewFrameData()
     func startNextFrame()
+    func sendNewFrameData()
+    func didTeamReachScoreLimit()
 }
 
 protocol CurrentMatchViewType {
+    func showMatchDetails()
     func reloadFrameHistoryData()
     func updateScore(for stepper: ScoreStepperTag, with value: Int, frameScore: Int)
     func populateViewsForNextFrame(bluePitcher name: String, redPitcher name: String, blueTeam score: Int, redTeam score: Int)
@@ -23,31 +25,42 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
 
     func sendNewFrameData() {
         view.populateViewsForNextFrame(
-            bluePitcher: model.currentFrame.bluePitcher.player.name,
-            redPitcher: model.currentFrame.redPitcher.player.name,
+            bluePitcher: model.bluePitcher.player.name,
+            redPitcher: model.redPitcher.player.name,
             blueTeam: model.currentMatch.blueTeam.score,
             redTeam: model.currentMatch.redTeam.score
         )
     }
 
-    func startNextFrame() {
-        let currentFrame = model.currentFrame
-        let pointsThisFrame = currentFrame.generateFrameScore()
-        model.currentMatch.generateMatchSore(scoringTeam: currentFrame.scoringTeam, points: pointsThisFrame)
-
-        guard model.blueTeam.score < 21 && model.redTeam.score < 21 else {
-            print("a team has won")
-            sendNewFrameData()
-            return
+    func didTeamReachScoreLimit() {
+        recordFrameResults()
+        if model.blueTeam.score < 21 && model.redTeam.score < 21 {
+            startNextFrame()
+        } else {
+            model.currentMatch.setWinningTeam()
+            // at some point, should add to match history archive.
+            view.showMatchDetails()
         }
 
+    }
+
+    func startNextFrame() {
         model.currentMatch.currentFrameNumber += 1
-        model.currentMatch.frames.insert(currentFrame, at: 0)
-        let frame = Frame(frame: model.currentMatch.currentFrameNumber, bluePitcher: model.blueTeam.players[model.currentPitcherIndex], redPitcher: model.redTeam.players[model.currentPitcherIndex])
+        let frame = Frame(frame: model.currentMatch.currentFrameNumber, bluePitcher: FrameStat(), redPitcher: FrameStat())
         model.currentFrame = frame
 
         view.reloadFrameHistoryData()
         sendNewFrameData()
+    }
+
+    func recordFrameResults() {
+        let currentFrame = model.currentFrame
+        let pointsThisFrame = currentFrame.generateFrameScore()
+        model.currentMatch.generateMatchSore(scoringTeam: currentFrame.scoringTeam, points: pointsThisFrame)
+
+        model.redPitcher.incrementStats(with: currentFrame.redFrame)
+        model.bluePitcher.incrementStats(with: currentFrame.blueFrame)
+        model.currentMatch.frames.insert(currentFrame, at: 0)
     }
 
 }
@@ -65,10 +78,10 @@ extension CurrentMatchPresenter {
         let currentFrame = model.currentMatch.frames[indexPath.row]
         cell.layoutViewConfigurations(scoringTeam: currentFrame.scoringTeam)
         cell.frameOutcomeLabel.text = "+\(currentFrame.generatePlusMinus())"
-        cell.bluePitcherLabel.text = currentFrame.bluePitcher.player.name
-        cell.blueScoreLabel.text = "\(currentFrame.bluePitcher.frameScore)"
-        cell.redPitcherLabel.text = currentFrame.redPitcher.player.name
-        cell.redScoreLabel.text = "\(currentFrame.redPitcher.frameScore)"
+        cell.bluePitcherLabel.text = model.bluePitcher.player.name
+        cell.blueScoreLabel.text = "\(currentFrame.blueFrame.score)"
+        cell.redPitcherLabel.text = model.redPitcher.player.name
+        cell.redScoreLabel.text = "\(currentFrame.redFrame.score)"
         cell.frameNumberLabel.text = "Fr. \(currentFrame.frameNumber)"
         return cell
     }
@@ -78,17 +91,17 @@ extension CurrentMatchPresenter {
     func updateScoreModel(for stepperTag: ScoreStepperTag, with newValue: Int) {
         switch stepperTag {
         case .onBlue:
-            model.currentFrame.bluePitcher.onThisFrame = newValue
-            view.updateScore(for: .onBlue, with: newValue, frameScore: model.currentFrame.bluePitcher.frameScore)
+            model.currentFrame.blueFrame.onBoard = newValue
+            view.updateScore(for: .onBlue, with: newValue, frameScore: model.currentFrame.blueFrame.score)
         case .inBlue:
-            model.currentFrame.bluePitcher.inThisFrame = newValue
-            view.updateScore(for: .inBlue, with: newValue, frameScore: model.currentFrame.bluePitcher.frameScore)
+            model.currentFrame.blueFrame.cornholes = newValue
+            view.updateScore(for: .inBlue, with: newValue, frameScore: model.currentFrame.blueFrame.score)
         case .onRed:
-            model.currentFrame.redPitcher.onThisFrame = newValue
-            view.updateScore(for: .onRed, with: newValue, frameScore: model.currentFrame.redPitcher.frameScore)
+            model.currentFrame.redFrame.onBoard = newValue
+            view.updateScore(for: .onRed, with: newValue, frameScore: model.currentFrame.redFrame.score)
         case .inRed:
-            model.currentFrame.redPitcher.inThisFrame = newValue
-            view.updateScore(for: .inRed, with: newValue, frameScore: model.currentFrame.redPitcher.frameScore)
+            model.currentFrame.redFrame.cornholes = newValue
+            view.updateScore(for: .inRed, with: newValue, frameScore: model.currentFrame.redFrame.score)
         }
     }
 }
